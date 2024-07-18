@@ -1,0 +1,1 @@
+<a href="{{$link}}" class="mt-2 hover:text-primary hover-link {{$classes = ''}}">{{$slot}}</a>

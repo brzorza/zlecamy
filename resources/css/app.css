@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    font-family: 'Quicksand';
+}
+
+.profile-menu{
+    height: calc(100vh - 96px);
+}
+
+.underline-link {
+    position: relative;
+}
+.underline-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(to right, #9fef00, #00efe1);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+.underline-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.menu-separator{
+    border-right: 2px solid black;
+}
+
+.profile-nav{
+    background-image: -webkit-linear-gradient(to right, #181818, #1a1a1a);
+    background-image: linear-gradient(to right, #181818, #1a1a1a);
+    background: -moz-linear-gradient(to right, #181818, #1a1a1a);
+}
+
+.hover-link{
+    transition: transform 0.3s ease;
+}
+
+.hover-link:hover{
+    transform: translateX(10px);
+}
+
+/*###########*/
+/*   HOME    */
+/*###########*/
+
+/* home typing animation */
+#typing-animation{
+    @apply border-primary;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right-width: 4px;
+    padding-right: 6px;
+    animation: blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #9fef00; }
+}
+
+/* home button hover spin */
+/* @property --bg-angle {
+    inherits: false;
+    initial-value: 205deg;
+    syntax: "<angle>";
+}
+
+@keyframes spin {
+    to {
+        --bg-angle: 565deg;
+    }
+}
+
+.home-button-animation {
+    
+    animation: spin 2.5s infinite linear paused;
+
+    background:
+    linear-gradient(
+        to bottom,
+        #121112,
+        #121112
+    )
+    padding-box,
+    conic-gradient(
+        from var(--bg-angle),
+        hsl(78, 100%, 50%) 10%,
+        hsl(190, 100%, 44.7%) 70%
+    )
+    border-box;
+    border: 3px solid transparent;
+    &:hover {
+        animation-play-state: running;
+    }
+} */
+
+.home-route::after{ 
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 0;
+    border: 6px solid #9fef00;
+    border-radius: 50%; 
+}
+
+.expand-home-wrap .fa-chevron-up{
+    position: absolute;
+    right: 1rem;
+    transform: translateY(25%);
+    transition: transform 0.5s ease-out;
+}
+.expand-home-wrap:has(.show) .fa-chevron-up{
+    transform: rotate(180deg);
+    
+}
+.catrgory-box-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+.catrgory-box-content.show {
+    max-height: 200px;
+}
+.categories-image{
+    border-radius: 50px 50px 50px 50%;
+}
+
+.home-form-bg{
+    background: linear-gradient(115deg, #9fef00, #00efe1);
+}
+
+/* offers from user profile  */
+.user-offers-aspect{
+    aspect-ratio: 16/9;
+}
+
+/* Offer creation tags boxes */
+ul#tagsContainer li{
+    background: #9fef00;
+    margin-right: 7px;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #9fef00;
+}
+
+input:-internal-autofill-selected {
+    appearance: menulist-button;
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+}

@@ -1,0 +1,44 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./resources/**/*.blade.php",
+    "./resources/**/*.js",
+    "./resources/**/*.vue",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        // 9fef00 zielony
+        // 00efe1 niebieski
+        // 121112 161616 bg
+        // #191c1f tło z revolu
+        // red BF3131 B31312 D80032
+        // #ff7e5f, #feb47b alternatywne pomaranczowo pastelowe
+        primary: '#9fef00',
+        primaryh: '7ab700',
+        secondary: '#00efe1',
+        danger: '#B31312',
+        dangerh: '#BF3131',
+        background: '#121112',
+        backgroundl: '#1e1e1e',
+        backgroundll: '#222',
+      },
+      boxShadow: {
+        'light': '0px 0px 5px 0px #9fef0020',
+      },
+      minWidth: {
+        '120': '480px',
+      },
+      height: {
+        '120': '550px',
+        '150': '650px',
+      },
+      width: {
+        '120': '550px',
+        '135': '600px',
+        '150': '650px',
+      }
+    },
+  },
+  plugins: [],
+}
