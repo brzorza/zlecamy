@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->string('name')->nullable();
             $table->string('surname')->nullable();
-            $table->string('languages')->nullable();
             $table->string('profile_picture')->nullable();
             $table->string('status')->default('user');
             $table->timestamp('email_verified_at')->nullable();

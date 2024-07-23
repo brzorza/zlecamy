@@ -66,7 +66,7 @@
             @if(!empty($offer->all_tags))
                 <div class="flex flex-row gap-2 my-6 text-background">
                     @foreach(explode(',', $offer->all_tags) as $tag)
-                        <div class="bg-primary w-fit px-4 py-1 rounded-xl font-semibold">{{$tag}}</div>
+                        <x-offer.tag-tooltip tooltip="{{$tag}}">{{$tag}}</x-offer.tag-tooltip>
                     @endforeach
                 </div>
             @endif
@@ -95,6 +95,8 @@
                             <p class="w-3/5">Kolejka zamówień:</p>
                             <p class="w-2/5">12</p>
                         </x-offer.offer-attributes>
+                        {{-- TODO link do zamówienia --}}
+                        <x-buttons.success-full link='#' classes="h-10 font-semibold">Zamów</x-buttons.success-full>
                     </div>
                 </div>
             </div>

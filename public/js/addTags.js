@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function createLi(){
         ul.querySelectorAll('li').forEach(li => li.remove());
         allTags.slice().reverse().forEach(tag =>{
-            let liTag = `<li onClick="removeTag(this, '${tag}')" class="cursor-pointer">${tag} <i class="fa-solid fa-xmark"></i></li>`;
+            let liTag = `<li onClick="removeTag(this, '${tag}')" class="cursor-pointer mt-2">${tag} <i class="fa-solid fa-xmark"></i></li>`;
             ul.insertAdjacentHTML('afterbegin', liTag);
         })
         updateHiddenInput();

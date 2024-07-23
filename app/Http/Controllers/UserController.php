@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Language;
+use App\Models\LanguageProficiency;
 use App\Models\User;
 use App\Models\Offer;
+use App\Models\UserLanguage;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
@@ -68,13 +71,16 @@ class UserController extends Controller
 
     public function showEdit(){
 
-        $user = User::where('id', auth()->id())->firstOrFail();
+        $user = User::where('id', auth()->id())->with(['userLanguages.language', 'userLanguages.proficiency'])->firstOrFail();
+        $languages = Language::all();
+        $languages_proficiency = LanguageProficiency::all();
 
-        return view('users.edit', compact('user'));
+        return view('users.edit', compact('user', 'languages', 'languages_proficiency'));
     }
+
     public function edit(Request $request){
 
-        $user = User::where('id', auth()->id())->firstOrFail();
+        $user = User::where('id', auth()->id())->with('userLanguages')->firstOrFail();
 
         $formfields = $request->validate([
             'profile_picture'=> 'image|mimes:jpeg,png,jpg,webp|max:20048',
@@ -83,17 +89,39 @@ class UserController extends Controller
             'surname' => 'string|nullable',
         ]);
 
+        $languageInfo = $request->validate([
+            'language_id' => 'integer|nullable',
+            'proficiency_id' => 'integer|nullable',
+        ]);
+
+        // see if user can add language
+        $can_add_language = true;
+
+        foreach($user->userLanguages as $id){
+            if($id->language_id == $languageInfo['language_id']){
+                $can_add_language = false;
+            }
+        }
+        
+        // add language and its proficiency
+        if(!empty($languageInfo['language_id']) && !empty($languageInfo['proficiency_id'])){
+            $user->userLanguages()->create([
+                'language_id' => $languageInfo['language_id'],
+                'proficiency_id' => $languageInfo['proficiency_id'],
+            ]);
+        }
+
         // See if image is beeing changed, delete previous and add new
         if($request->hasFile('profile_picture')) {
+            // prevent deleting default image and delete current
             if ($user->profile_picture != 'images/profile_pictures/no-image.jpg') {
                 Storage::disk('public')->delete($user->profile_picture);
             }
-
+            // add new
             $image = $request->file('profile_picture');
             $imagePath = $image->store('images/profile_pictures', 'public');
             $formfields['profile_picture'] = $imagePath;
         }
-
 
         // update user info
         if(!empty($formfields['profile_picture'])){

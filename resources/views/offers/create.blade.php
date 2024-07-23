@@ -8,7 +8,7 @@
             </div>
             <div class="w-100 min-h-96 rounded-2xl flex flex-col items-center py-10 my-10 bg-backgroundl">
                 <h2 class="text-gray-300 text-5xl">Stwórz swoją ofertę</h2>
-                <div class="md:min-w-120 mt-6">
+                <div class="w-full mt-6 max-w-120">
                     <form action="{{ route('profile.offers.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                             <x-input-field type="text" name="title" value="{{old('title')}}" label="Tytuł: " />
@@ -41,7 +41,7 @@
                                     
                                 </div>
                             </x-input>
-                            <div class="w-100 mt-2">
+                            <div class="w-100 flex flex-row flex-wrap">
                                 <ul id="tagsContainer" class="flex flex-row flex-wrap g-2">
                                     {{-- Added tags go here --}}
                                 </ul>

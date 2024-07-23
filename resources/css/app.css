@@ -158,3 +158,29 @@ input:-internal-autofill-selected {
     background-color: #1e1e1e !important;
     color: #ffffff !important;
 }
+
+/* Single offer */
+.tag-hover::after {
+    content: attr(data-tooltip);
+    visibility: hidden;
+    opacity: 0;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    padding: 3px 15px;
+    position: absolute;
+    border: 1px solid #fff;
+    top: -50%;
+    right: -90%;
+    transform: translateX(-50%);
+    transition: visibility 0s, opacity 0.3s ease-in-out;
+    z-index: 1;
+    white-space: nowrap;
+    font-size: 10px;
+}
+
+.tag-hover:hover::after {
+    visibility: visible;
+    opacity: 1;
+}

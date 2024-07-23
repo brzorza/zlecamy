@@ -7,7 +7,7 @@
                 </x-buttons.success>
             </div>
             <div class="w-100 min-h-96 rounded-2xl flex flex-col justify-center mt-10 px-10 py-6 bg-backgroundl">
-                
+                Do zrobienia TODO
             </div>
         </div>
     </x-profileMenu>

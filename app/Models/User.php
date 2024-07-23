@@ -49,9 +49,7 @@ class User extends Authenticatable
     public function offers(): HasMany{
         return $this->hasMany(Offer::class);
     }
-    public function languages(){
-        return $this->belongsToMany(Language::class, 'user_languages')
-                    ->withPivot('proficiency_level')
-                    ->withTimestamps();
+    public function userLanguages(){
+        return $this->hasMany(UserLanguage::class);
     }
 }

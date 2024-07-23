@@ -27,7 +27,10 @@ export default {
         'light': '0px 0px 5px 0px #9fef0020',
       },
       minWidth: {
-        '120': '480px',
+        '120': '550px',
+      },
+      maxWidth: {
+        '120': '550px',
       },
       height: {
         '120': '550px',

@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(OfferTagsSeeder::class);
         $this->call(OffersSeeder::class);
         $this->call(LanguagesSeeder::class);
+        $this->call(LanguagesProficiencySeeder::class);
     }
 }
