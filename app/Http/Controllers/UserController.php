@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Language;
-use App\Models\LanguageProficiency;
 use App\Models\User;
 use App\Models\Offer;
+use App\Models\Language;
 use App\Models\UserLanguage;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Models\LanguageProficiency;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -18,7 +19,7 @@ class UserController extends Controller
     }
 
     public function store(Request $request){
-
+        
         $formfields = $request->validate([
             'username' => ['required', 'min:3', Rule::unique('users', 'username')],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
@@ -28,9 +29,12 @@ class UserController extends Controller
         // Hash Password
         $formfields['password'] = bcrypt($formfields['password']);
         
-        // Creare
-        // dd($formfields);
+        //Add user type
+        $formfields['type'] = isset($request->type) ? 'seller' : 'user';
+        
+        // Create user
         $user = User::create($formfields);
+        
         //Login Created User
         auth()->login($user);
 
@@ -43,7 +47,7 @@ class UserController extends Controller
             'password' => 'required'
         ]);
 
-        if(auth()->attempt($formfields)){
+        if(Auth::attempt($formfields)){
             $request->session()->regenerate();
 
             return redirect('/profile')->with('success', 'You have logged id!');

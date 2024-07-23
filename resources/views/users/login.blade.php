@@ -43,7 +43,7 @@
                         @enderror
                     </div>
                     <div class="flex items-center justify-between">
-                        <button type="submit" class="w-full bg-primary text-gray-700 text-lg font-semibold px-4 py-2 border-2 border-primary hover:text-gray-200 rounded-md hover:bg-backgroundl ">Login</button>
+                        <button type="submit" class="mt-4 px-4 py-2 bg-primary border-2 border-primary hover:bg-backgroundl hover:text-gray-200 text-backgroundl text-xl font-semibold rounded w-full">Login</button>
                     </div>
                 </form>
             </div>
@@ -63,7 +63,7 @@
                 </div>
     
                 <h2 class="text-3xl font-bold bg-backgroundl pt-10 pb-6 text-white px-8">Zarejestruj się</h2>
-                <form action="/register" method="POST" class="px-8 pb-10 bg-backgroundl rounded">
+                <form action="{{ route('register') }}" method="POST" class="px-8 pb-10 bg-backgroundl rounded">
                     @csrf
                     <div class="mb-4">
                         <label for="name" class="block text-white">Username</label>
@@ -81,15 +81,19 @@
                             <p class="text-red-500 text-xs-mt-1">{{$message}}</p>
                         @enderror
                     </div>
-                    <div class="mb-10">
+                    <div class="mb-4">
                         <label for="password" class="block text-white">Hasło</label>
                         <input type="password" id="password" name="password" class="w-full px-3 py-2 border rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
                         @error('password')
                             <p class="text-red-500 text-xs-mt-1">{{$message}}</p>
                         @enderror
                     </div>
+                    <div class="mb-10">
+                        <label for="type">Chcesz sprzedawać?</label>
+                        <input name='type' type='checkbox'/>
+                    </div>
                     <div class="flex items-center justify-between">
-                        <button type="submit" class="w-full bg-primary text-gray-700 text-lg font-semibold px-4 py-2 rounded-md hover:bg-secondary focus:outline-none focus:bg-secondary">Zarejestruj się</button>
+                        <button type="submit" class="w-full mt-4 px-4 py-2 bg-primary border-2 border-primary hover:bg-backgroundl hover:text-gray-200 text-backgroundl text-xl font-semibold rounded">Zarejestruj się</button>
                     </div>
                 </form>
             </div>

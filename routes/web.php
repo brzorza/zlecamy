@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OfferCatalogController;
 
 Route::get('/', [PagesController::class,'index'])->name('welcome');
@@ -31,3 +32,6 @@ Route::delete('/profile/offers/destroy/{id}', [OfferController::class,'destroy']
 // Offers
 Route::get('/offers/{category}', [OfferCatalogController::class,'index'])->name('catalog.index');
 Route::get('/offer/{id}', [OfferCatalogController::class,'showSingle'])->name('catalog.showSingle');
+
+// Newsletter
+Route::post('/newsletter', [NewsletterController::class,'addUser'])->name('newsletter');

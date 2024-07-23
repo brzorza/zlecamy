@@ -20,10 +20,14 @@
         <div class="w-3/12 flex flex-col">
             <h6 class="text-3xl font-semibold uppercase">Bądź na bierząco!</h6>
             <p class="text-md mt-2">Zapisz się na nasz newsletter</p>
-            {{-- TODO podpiać newsleter --}}
-            <form action="" method="POST">
-                <x-input-field classes="rounded-full px-4 py-2 focus:border-backgroundl border-backgroundl mt-2" type="title" name="title" value="{{old('title')}}" placeholder="Adres e-mail" />
-                <button type="submit" class="mt-4 px-10 py-1 border-2 border-primary text-background bg-primary hover:bg-backgroundl hover:text-gray-200 text-xl font-semibold rounded-full">Zapisz się!</button>
+            <form action="{{ route('newsletter') }}" method="POST">
+                @csrf
+                <x-input-field classes="rounded-full px-4 py-2 focus:border-backgroundl border-backgroundl mt-2" type="email" name="email" value="{{old('email')}}" 
+                placeholder="Adres e-mail" />
+                <button type="submit" 
+                class="mt-4 px-10 py-1 border-2 border-primary text-background bg-primary hover:bg-backgroundl hover:text-gray-200 text-xl font-semibold rounded-full">
+                    Zapisz się!
+                </button>
             </form>
         </div>
     </div>
