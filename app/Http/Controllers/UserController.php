@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Language;
+use App\Models\LanguageProficiency;
 use App\Models\User;
 use App\Models\Offer;
-use App\Models\Language;
 use App\Models\UserLanguage;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use App\Models\LanguageProficiency;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {

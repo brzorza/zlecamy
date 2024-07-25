@@ -9,7 +9,7 @@
                     <div class="flex flex-row mt-6">
                         <img src="/storage/{{$offer->user->profile_picture}}" alt="Zdjęcie profilowe użytkownika" class="w-20 rounded-2xl">
                         <div class="w-3/5 flex flex-col mx-6 justify-center">
-                            <a href="/user/{{$offer->user->id}}" class="text-primary hover-link">{{$offer->user->username}}</a>
+                            <a href="{{ route('user.show', ['username' => $offer->user->username]) }}" class="text-primary hover-link">{{$offer->user->username}}</a>
                             {{-- TODO skontaktuj się --}}
                             <x-buttons.success-full link="/text" classes="mt-2 px-4 font-semibold">Skontatuj się</x-buttons.success-full>
                         </div>

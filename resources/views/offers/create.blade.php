@@ -1,5 +1,5 @@
 <x-layout>
-    <x-profileMenu>
+    <x-profile-menu>
         <div class="flex flex-col">
             <div class="w-100 mt-4">
                 <x-buttons.danger link="{{ route('profile.offers') }}" classes='px-6 py-2 text-gray-200 text-xl float-left font-bold'>
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </div>
-    </x-profileMenu>
+    </x-profile-menu>
 </x-layout>
 
 <script src="{{ asset('js/addTags.js') }}"></script>

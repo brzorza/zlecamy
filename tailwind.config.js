@@ -15,7 +15,7 @@ export default {
         // red BF3131 B31312 D80032
         // #ff7e5f, #feb47b alternatywne pomaranczowo pastelowe
         primary: '#9fef00',
-        primaryh: '7ab700',
+        primaryh: '#7ab700',
         secondary: '#00efe1',
         danger: '#B31312',
         dangerh: '#BF3131',

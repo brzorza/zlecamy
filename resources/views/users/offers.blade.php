@@ -1,5 +1,5 @@
 <x-layout>
-    <x-profileMenu>
+    <x-profile-menu>
         <div class="flex flex-col">
             <div class="w-100 mt-4">
                 <a href="{{ route('profile.offers.add') }}" class="px-6 py-2 bg-primary text-gray-700 text-xl float-right font-bold rounded-lg shadow-md hover:bg-background border-2 border-primary hover:text-gray-200">
@@ -49,7 +49,7 @@
             @endif
 
         </div>
-    </x-profileMenu>
+    </x-profile-menu>
 </x-layout>
 
 <div id="deleteConfirmationModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
@@ -58,7 +58,7 @@
         <p>Czy jesteś pewny, że chcesz usunąć?</p>
         <div class="mt-4 flex justify-end space-x-4">
             <button 
-                class="bg-gray-300 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded"
+                class="bg-danger hover:bg-dangerh text-white px-4 py-2 rounded"
                 onclick="closeDeleteConfirmation()"
             >
                 Anuluj
@@ -66,7 +66,7 @@
             <form id="deleteOfferForm" method="POST" action="">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="bg-danger hover:bg-dangerh text-white px-4 py-2 rounded">
+                <button type="submit" class="bg-primary hover:bg-primaryh text-background px-4 py-2 rounded">
                     Usuń
                 </button>
             </form>

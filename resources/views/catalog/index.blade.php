@@ -7,14 +7,14 @@
             @foreach ($offers as $offer)
                 <div class="bg-backgroundl rounded-xl p-4 text-white border border-background hover:border-primary relative">
                     <div class="w-100 h-auto relative mb-2 user-offers-aspect">
-                        <a href="/offer/{{$offer->id}}">
+                        <a href="{{ route('catalog.showSingle', ['id' => $offer->id]) }}">
                         <img src="{{$offer->cover ? asset('storage/' . $offer->cover) : asset('/images/no-image.png')}}" alt="Okładka oferty" class="absolute top-0 left-0 w-full h-full object-cover rounded-lg">
                         </a>
                     </div>
-                    <a href="">
+                    <a href="{{ route('user.show', ['username' => $offer->user->username]) }}">
                         <p class="text-sm text-primary hover:text-secondary">{{$offer->user->username}}</p>
                     </a>
-                    <a href="/offer/{{$offer->id}}">
+                    <a href="{{ route('catalog.showSingle', ['id' => $offer->id]) }}">
                         <h3 class="text-lg hover:underline">{{$offer->title}}</h3>
                     </a>
                     <p class="text-md">{{$offer->localization}}</p>

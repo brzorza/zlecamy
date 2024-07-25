@@ -16,7 +16,7 @@ class OffersSeeder extends Seeder
         DB::table('offers')->insert([
             [
                 'user_id' => 1,
-                'title' => 'Jakis tam tytul',
+                'title' => 'brzorza kox',
                 'description' => 'jakis krótki opis',
                 'localization' => 'Kielce',
                 'cover' => 'images/offerCovers/1W2dV4ZMkQrIoDXYB3T645GyOnNzJrvj27f7UU64.webp',
@@ -36,7 +36,7 @@ class OffersSeeder extends Seeder
             ],
             [
                 'user_id' => 3,
-                'title' => 'Jakis tam tytul',
+                'title' => 'user 3 ofertya max',
                 'description' => 'jakis krótki opis',
                 'localization' => 'Kielce',
                 'cover' => 'images/offerCovers/1W2dV4ZMkQrIoDXYB3T645GyOnNzJrvj27f7UU64.webp',
@@ -46,7 +46,7 @@ class OffersSeeder extends Seeder
             ],
             [
                 'user_id' => 4,
-                'title' => 'Jakis tam tytul',
+                'title' => 'Offertki',
                 'description' => 'jakis krótki opis',
                 'localization' => 'Kielce',
                 'cover' => 'images/offerCovers/1W2dV4ZMkQrIoDXYB3T645GyOnNzJrvj27f7UU64.webp',
@@ -56,7 +56,7 @@ class OffersSeeder extends Seeder
             ],
             [
                 'user_id' => 5,
-                'title' => 'Jakis tam tytul',
+                'title' => 'krzychu ofertowy',
                 'description' => 'jakis krótki opis',
                 'localization' => 'Kielce',
                 'cover' => 'images/offerCovers/1W2dV4ZMkQrIoDXYB3T645GyOnNzJrvj27f7UU64.webp',
@@ -66,7 +66,7 @@ class OffersSeeder extends Seeder
             ],
             [
                 'user_id' => 1,
-                'title' => 'Jakis tam tytul',
+                'title' => 'brzorza kox',
                 'description' => 'jakis krótki opis',
                 'localization' => 'Kielce',
                 'cover' => 'images/offerCovers/1W2dV4ZMkQrIoDXYB3T645GyOnNzJrvj27f7UU64.webp',
@@ -86,7 +86,7 @@ class OffersSeeder extends Seeder
             ],
             [
                 'user_id' => 3,
-                'title' => 'Jakis tam tytul',
+                'title' => 'user 3 ofertya max',
                 'description' => 'jakis krótki opis',
                 'localization' => 'Kielce',
                 'cover' => 'images/offerCovers/1W2dV4ZMkQrIoDXYB3T645GyOnNzJrvj27f7UU64.webp',
@@ -97,7 +97,7 @@ class OffersSeeder extends Seeder
 
             [
                 'user_id' => 4,
-                'title' => 'Jakis tam tytul',
+                'title' => 'Offertki',
                 'description' => 'jakis krótki opis',
                 'localization' => 'Kielce',
                 'cover' => 'images/offerCovers/1W2dV4ZMkQrIoDXYB3T645GyOnNzJrvj27f7UU64.webp',
@@ -107,7 +107,7 @@ class OffersSeeder extends Seeder
             ],
             [
                 'user_id' => 5,
-                'title' => 'Jakis tam tytul',
+                'title' => 'krzychu ofertowy',
                 'description' => 'jakis krótki opis',
                 'localization' => 'Kielce',
                 'cover' => 'images/offerCovers/1W2dV4ZMkQrIoDXYB3T645GyOnNzJrvj27f7UU64.webp',
@@ -117,7 +117,7 @@ class OffersSeeder extends Seeder
             ],
             [
                 'user_id' => 1,
-                'title' => 'Jakis tam tytul',
+                'title' => 'brzorza kox',
                 'description' => 'jakis krótki opis',
                 'localization' => 'Kielce',
                 'cover' => 'images/offerCovers/1W2dV4ZMkQrIoDXYB3T645GyOnNzJrvj27f7UU64.webp',
@@ -137,7 +137,7 @@ class OffersSeeder extends Seeder
             ],
             [
                 'user_id' => 3,
-                'title' => 'Jakis tam tytul',
+                'title' => 'user 3 ofertya max',
                 'description' => 'jakis krótki opis',
                 'localization' => 'Kielce',
                 'cover' => 'images/offerCovers/1W2dV4ZMkQrIoDXYB3T645GyOnNzJrvj27f7UU64.webp',
@@ -147,7 +147,7 @@ class OffersSeeder extends Seeder
             ],
             [
                 'user_id' => 4,
-                'title' => 'Jakis tam tytul',
+                'title' => 'Offertki',
                 'description' => 'jakis krótki opis',
                 'localization' => 'Kielce',
                 'cover' => 'images/offerCovers/1W2dV4ZMkQrIoDXYB3T645GyOnNzJrvj27f7UU64.webp',
@@ -157,7 +157,7 @@ class OffersSeeder extends Seeder
             ],
             [
                 'user_id' => 5,
-                'title' => 'Jakis tam tytul',
+                'title' => 'krzychu ofertowy',
                 'description' => 'jakis krótki opis',
                 'localization' => 'Kielce',
                 'cover' => 'images/offerCovers/1W2dV4ZMkQrIoDXYB3T645GyOnNzJrvj27f7UU64.webp',
@@ -177,7 +177,7 @@ class OffersSeeder extends Seeder
             ],
             [
                 'user_id' => 3,
-                'title' => 'Jakis tam tytul',
+                'title' => 'user 3 ofertya max',
                 'description' => 'jakis krótki opis',
                 'localization' => 'Kielce',
                 'cover' => 'images/offerCovers/1W2dV4ZMkQrIoDXYB3T645GyOnNzJrvj27f7UU64.webp',
@@ -187,7 +187,7 @@ class OffersSeeder extends Seeder
             ],
             [
                 'user_id' => 4,
-                'title' => 'Jakis tam tytul',
+                'title' => 'Offertki',
                 'description' => 'jakis krótki opis',
                 'localization' => 'Kielce',
                 'cover' => 'images/offerCovers/1W2dV4ZMkQrIoDXYB3T645GyOnNzJrvj27f7UU64.webp',
@@ -197,7 +197,7 @@ class OffersSeeder extends Seeder
             ],
             [
                 'user_id' => 5,
-                'title' => 'Jakis tam tytul',
+                'title' => 'krzychu ofertowy',
                 'description' => 'jakis krótki opis',
                 'localization' => 'Kielce',
                 'cover' => 'images/offerCovers/1W2dV4ZMkQrIoDXYB3T645GyOnNzJrvj27f7UU64.webp',
@@ -207,7 +207,7 @@ class OffersSeeder extends Seeder
             ],
             [
                 'user_id' => 1,
-                'title' => 'Jakis tam tytul',
+                'title' => 'brzorza kox',
                 'description' => 'jakis krótki opis',
                 'localization' => 'Kielce',
                 'cover' => 'images/offerCovers/1W2dV4ZMkQrIoDXYB3T645GyOnNzJrvj27f7UU64.webp',
