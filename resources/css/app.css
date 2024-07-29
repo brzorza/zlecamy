@@ -52,6 +52,60 @@ input[type="checkbox"]:checked {
     accent-color: #9fef00;
 }
 
+/* Flash message animation */
+.animated-move-in-out{
+    right: -500px;
+    animation: moveRightAndBack 8s ease-in-out;
+}
+@keyframes moveRightAndBack {
+    0% {
+        right: -350px;
+    }
+    15% {
+        right: 30px;
+    }
+    50% {
+        right: 30px;
+    }
+    95% {
+        right: -550px;
+    }
+    100% {
+        right: -550px;
+    }
+}
+
+.animated-border-bottom::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 1%;
+    height: 3px;
+    @apply bg-green-700;
+    animation: disappear 4s forwards;
+}
+
+.animated-border-bottom-fail::after{
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 1%;
+    height: 3px;
+    @apply bg-red-800;
+    animation: disappear 4s forwards;
+}
+
+@keyframes disappear {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 98%;
+    }
+}
+
 /*###########*/
 /*   HOME    */
 /*###########*/

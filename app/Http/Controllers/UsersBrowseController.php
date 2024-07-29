@@ -30,4 +30,11 @@ class UsersBrowseController extends Controller
 
         return view('browse_users.offers', compact('user'));
     }
+
+    public function opinions($username){
+
+        $user = User::where('username', $username)->firstOrFail();
+        
+        return view('browse_users.opinions', compact('user'));
+    }
 }

@@ -29,6 +29,7 @@ Route::delete('/profile/offers/destroy/{id}', [OfferController::class,'destroy']
 // Users profiles
 Route::get('/profile/browse/{username}', [UsersBrowseController::class,'show'])->name('user.show');
 Route::get('/profile/browse/{username}/offers', [UsersBrowseController::class,'offers'])->name('user.offer');
+Route::get('/profile/browse/{username}/opinions', [UsersBrowseController::class,'opinions'])->name('user.opinion');
 
 // Offers
 Route::get('/offers/{category}', [OfferCatalogController::class,'index'])->name('catalog.index');

@@ -39,6 +39,9 @@ class OfferController extends Controller
             $image = $request->file('cover');
             $imagePath = $image->store('images/offerCovers', 'public');
             $formfields['cover'] = $imagePath;
+        }else{
+            // TODO add default
+            $formfields['cover'] = 'images/offerCovers/1W2dV4ZMkQrIoDXYB3T645GyOnNzJrvj27f7UU64.webp';
         }
 
         $offer = Offer::create($formfields);

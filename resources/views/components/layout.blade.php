@@ -23,8 +23,7 @@
 
 <x-navbar/>
 
-    {{-- <x-flash-message />
-    <x-flash-message-fail /> --}}
+    <x-flash-message/>
 
     <main class={{request()->is('profile*') ? "pt-24" : "pt-36"}}>
         {{$slot}}
