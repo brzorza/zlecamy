@@ -11,7 +11,16 @@
                         <div class="w-3/5 flex flex-col mx-6 justify-center">
                             <a href="{{ route('user.show', ['username' => $offer->user->username]) }}" class="text-primary hover-link">{{$offer->user->username}}</a>
                             {{-- TODO skontaktuj się --}}
-                            <x-buttons.success-full link="/text" classes="mt-2 px-4 font-semibold">Skontatuj się</x-buttons.success-full>
+                            <form action="{{ route('chat.create') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name='title' value="{{$offer->user->username . ' - ' . $offer->title}}">
+                                <input type="hidden" name='seller_id' value="{{$offer->user->id}}">
+                                <input type="hidden" name='offer_id' value="{{$offer->id}}">
+                                <button type="submit" 
+                                class="w-full mt-2 border border-primary text-xsm text-background bg-primary hover:bg-backgroundl hover:text-gray-200 text-md font-semibold rounded-full">
+                                    Skontatuj się
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>

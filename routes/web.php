@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\PagesController;
@@ -37,3 +38,6 @@ Route::get('/offer/{id}', [OfferCatalogController::class,'showSingle'])->name('c
 
 // Newsletter
 Route::post('/newsletter', [NewsletterController::class,'addUser'])->name('newsletter');
+
+// Chat
+Route::post('/chat/create', [ChatController::class,'create'])->name('chat.create');
