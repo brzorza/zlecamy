@@ -13,8 +13,6 @@
                             {{-- TODO skontaktuj się --}}
                             <form action="{{ route('chat.create') }}" method="POST">
                                 @csrf
-                                <input type="hidden" name='title' value="{{$offer->user->username . ' - ' . $offer->title}}">
-                                <input type="hidden" name='seller_id' value="{{$offer->user->id}}">
                                 <input type="hidden" name='offer_id' value="{{$offer->id}}">
                                 <button type="submit" 
                                 class="w-full mt-2 border border-primary text-xsm text-background bg-primary hover:bg-backgroundl hover:text-gray-200 text-md font-semibold rounded-full">

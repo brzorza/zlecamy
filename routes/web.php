@@ -41,3 +41,7 @@ Route::post('/newsletter', [NewsletterController::class,'addUser'])->name('newsl
 
 // Chat
 Route::post('/chat/create', [ChatController::class,'create'])->name('chat.create');
+Route::get('/profile/chat/{id}', [ChatController::class,'index'])->name('profile.chat')->middleware('auth');
+Route::get('/profile/chat', [ChatController::class,'empty'])->name('profile.chat.empty')->middleware('auth');
+Route::post('/chat/send', [ChatController::class,'sendMessage'])->name('chat.send')->middleware('auth');
+Route::get('/chat/get', [ChatController::class,'getMessages'])->name('chat.get')->middleware('auth');

@@ -21,8 +21,7 @@ class Chat extends Model
 
     protected $keyType = 'string';
 
-    protected static function boot()
-    {
+    protected static function boot(){
         parent::boot();
 
         // Automatically generate a UUID for the ID when creating a new record
@@ -31,5 +30,9 @@ class Chat extends Model
                 $model->{$model->getKeyName()} = (string) Str::uuid();
             }
         });
+    }
+
+    public function chatTexts(){
+        return $this->hasMany(ChatText::class, 'chat_id');
     }
 }
