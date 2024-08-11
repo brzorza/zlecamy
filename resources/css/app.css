@@ -242,3 +242,22 @@ input:-internal-autofill-selected {
     visibility: visible;
     opacity: 1;
 }
+
+/* Chat */
+.chat-bg{
+    background: rgb(30,30,30);
+    background: linear-gradient(135deg, rgba(18,18,18,1) 0%, rgba(18,17,18,1) 50%, rgba(17,17,17,1) 100%);
+}
+
+.scrollable-element::-webkit-scrollbar {
+    width: 4px;
+}
+
+.scrollable-element::-webkit-scrollbar-thumb {
+    background-color: #9fef00;
+    border-radius: 10px;
+}
+
+.scrollable-element::-webkit-scrollbar-track {
+    background: transparent;
+}

@@ -38,7 +38,7 @@ class UserController extends Controller
         //Login Created User
         auth()->login($user);
 
-        return redirect('/profile')->with('success', 'User created and logged in!');
+        return redirect('/profile')->with('success', 'Konto zostało stworzone!');
     }
 
     public function authenticate(Request $request){
@@ -50,9 +50,9 @@ class UserController extends Controller
         if(Auth::attempt($formfields)){
             $request->session()->regenerate();
 
-            return redirect('/profile')->with('success', 'You have logged id!');
+            return redirect('/profile')->with('success', 'Zostałeś zalogowany!');
         }else{
-            return back()->withErrors(['email'=>'Invalid credentials'])->onlyInput();
+            return back()->withErrors(['email'=>'Niepoprawne dane'])->onlyInput();
         }
     }
 
@@ -62,7 +62,7 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/')->with('success', 'You have been logged out!');
+        return redirect('/')->with('success', 'Zostałeś wylogowany!');
     }
 
     // Edit your profile

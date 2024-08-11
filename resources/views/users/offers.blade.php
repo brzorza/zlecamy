@@ -1,20 +1,18 @@
 <x-layout>
     <x-profile-menu>
         <div class="flex flex-col">
-            <div class="w-100 mt-4">
-                <a href="{{ route('profile.offers.add') }}" class="px-6 py-2 bg-primary text-gray-700 text-xl float-right font-bold rounded-lg shadow-md hover:bg-background border-2 border-primary hover:text-gray-200">
+            <div class="w-100 mt-4 flex flex-row justify-between items-center">
+                @if($allOffers->count() > 0)
+                    <h1 class="text-gray-500 text-5xl text-left mb-6 float-left">Aktywne oferty</h1>
+                @else
+                    <h1 class="text-gray-500 text-5xl">Brak aktywnych ofert</h1>
+                @endif
+                <a href="{{ route('profile.offers.add') }}" class="px-6 py-2 h-fit bg-primary text-gray-700 text-xl float-right font-bold rounded-lg shadow-md hover:bg-background border-2 border-primary hover:text-gray-200">
                     <i class="fa-solid fa-plus text-lg"></i> Dodaj
                 </a>
             </div>
 
-            @if($allOffers->isEmpty())
-            <div class="w-100 min-h-96 rounded-2xl flex items-center justify-center mt-10 bg-backgroundl">
-                <h1 class="text-gray-500 text-5xl">Brak aktywnych ofert</h1>
-            </div>
-            @else
-
-            <div class="w-100 min-h-96 rounded-2xl flex flex-col justify-center mt-10 px-10 py-6 bg-backgroundl">
-                <h1 class="text-gray-500 text-5xl text-left mb-6">Aktywne oferty</h1>
+            <div class="w-100 min-h-96 rounded-2xl flex flex-col justify-center mt-4 px-10 py-6 bg-backgroundl">
 
                 <div class="w-100 grid grid-cols-4 grid-rows-2 gap-6">
                     @foreach ($allOffers as $offer)
@@ -46,7 +44,6 @@
                 </div>
 
             </div>
-            @endif
 
         </div>
     </x-profile-menu>

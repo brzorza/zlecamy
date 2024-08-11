@@ -15,13 +15,13 @@ export default {
         // red BF3131 B31312 D80032
         // #ff7e5f, #feb47b alternatywne pomaranczowo pastelowe
         primary: '#9fef00',
-        primaryh: '#7ab700',
+        primaryh: '#8ED600',
         secondary: '#00efe1',
         danger: '#B31312',
         dangerh: '#BF3131',
         background: '#121112',
         backgroundl: '#1e1e1e',
-        backgroundll: '#222',
+        backgroundll: '#333',
       },
       boxShadow: {
         'light': '0px 0px 5px 0px #9fef0020',
@@ -31,6 +31,10 @@ export default {
       },
       maxWidth: {
         '120': '550px',
+      },
+      minHeight: {
+        '120': '550px',
+        '150': '650px',
       },
       height: {
         '120': '550px',
