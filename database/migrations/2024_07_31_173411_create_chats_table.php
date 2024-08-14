@@ -11,10 +11,16 @@ class CreateChatsTable extends Migration
         Schema::create('chats', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title');
-            $table->integer('offer_id');
-            $table->integer('seller_id');
-            $table->integer('client_id');
+            $table->unsignedBigInteger('offer_id');
+            $table->unsignedBigInteger('seller_id');
+            $table->unsignedBigInteger('client_id');
             $table->timestamps();
+
+            //Add forein keys
+            $table->foreign('offer_id')->references('id')->on('offers');
+            $table->foreign('seller_id')->references('id')->on('users');
+            $table->foreign('client_id')->references('id')->on('users');
+
         });
     }
 

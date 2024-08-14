@@ -53,4 +53,11 @@ class User extends Authenticatable
     public function userLanguages(){
         return $this->hasMany(UserLanguage::class);
     }
+    public function chatsAsSeller(){
+        return $this->hasMany(Chat::class, 'seller_id');
+    }
+
+    public function chatsAsClient(){
+        return $this->hasMany(Chat::class, 'client_id');
+    }
 }

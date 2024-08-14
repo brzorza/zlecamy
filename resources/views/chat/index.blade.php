@@ -5,9 +5,15 @@
             <div class="min-h-96 rounded-2xl flex flex-row justify-center w-full mt-4 mx-auto px-10 py-6 bg-backgroundl">
                 <div class="w-2/5 flex flex-col">
                     <h1 class="text-gray-500 text-5xl text-left mb-6 float-left">Chats</h1>
-                    @foreach($allChats as $singleChat)
-                        <a href="{{ route('profile.chat', ['id' => $singleChat->id]) }}" class="mb-2">{{$singleChat->title}}</a>
-                    @endforeach
+                    <div class="scrollable-element h-120 flex flex-col mr-24 overflow-auto">
+                        @foreach($allChats as $singleChat)
+                        <a href="{{ route('profile.chat', ['id' => $singleChat->id]) }}" class="mb-4 mr-2">
+                            <div class="border border-primary rounded-xl pointer p-4">
+                                <p>{{$singleChat->seller->id == auth()->id() ? $singleChat->client->username : $singleChat->seller->username}}</p>
+                            </div>
+                        </a>
+                        @endforeach
+                    </div>
                 </div>
                 <div class="w-2/5">
                     @if(isset($chat))
@@ -19,9 +25,19 @@
 
                                 @foreach ($chatTexts as $text)
                                     @if($text->sender_id == auth()->id())
-                                        <x-chat.text-right>{{ $text->text }}</x-chat.text-right>
+                                    <div class="w-full">
+                                        <p class="w-4/5 relative ml-auto mt-4 text-justify text-white bg-backgroundl border border-primary rounded-lg p-4">
+                                            {{$text->text}}
+                                            <span class="text-date">{{ $text->created_at->format('H:i') }}</span>
+                                        </p>
+                                    </div>
                                     @else
-                                        <x-chat.text-left>{{ $text->text }}</x-chat.text-left>
+                                        <div class="w-full">
+                                            <p class="w-4/5 relative mr-auto mt-4 text-justify text-white bg-backgroundll border border-primary rounded-lg p-4">
+                                                {{$text->text}}
+                                                <span class="text-date">{{ $text->created_at->format('H:i') }}</span>
+                                            </p>
+                                        </div>
                                     @endif
                                 @endforeach
 

@@ -35,4 +35,12 @@ class Chat extends Model
     public function chatTexts(){
         return $this->hasMany(ChatText::class, 'chat_id');
     }
+
+    public function seller(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function client(){
+        return $this->belongsTo(User::class);
+    }
 }

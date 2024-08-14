@@ -261,3 +261,11 @@ input:-internal-autofill-selected {
 .scrollable-element::-webkit-scrollbar-track {
     background: transparent;
 }
+
+.text-date{
+    position: absolute;
+    bottom: 3px;
+    right: 5px;
+    font-size: 12px;
+    color: white;
+}

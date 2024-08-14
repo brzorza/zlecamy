@@ -12,17 +12,24 @@ function getMessages(){
     })
     .then(data => {
         // Handle success
-        
+
         // Empty chat box
         const chatContainer = document.getElementById('chatContainer');
         chatContainer.innerHTML = '';
 
         // Genereate chat
         data.data.forEach(item => {
+
+            // Convert date to +2 date
+            const date = new Date(item.created_at);
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+
             const message = `
                     <div class="w-full">
-                        <p class="w-4/5 ${item.sender_id === myId ? 'ml-auto bg-backgroundl' : 'mr-auto bg-backgroundll'} mt-4 text-justify text-white border border-primary rounded-lg p-4">
+                        <p class="w-4/5 relative ${item.sender_id === myId ? 'ml-auto bg-backgroundl' : 'mr-auto bg-backgroundll'} mt-4 text-justify text-white border border-primary rounded-lg p-4">
                             ${item.text}
+                            <span class="text-date">${hours}:${minutes}</span>
                         </p>
                     </div>
                 `;

@@ -16,6 +16,7 @@ class ChatText extends Model
     ];
 
     public function chat(){
-        return $this->hasMany(Chat::class, 'chat_id');
+        return $this->belongsTo(Chat::class, 'chat_id');
+        // jak cos sie zjebalo z wiadomosciami to przez to ze było tu has many
     }
 }

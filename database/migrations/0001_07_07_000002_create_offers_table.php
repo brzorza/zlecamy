@@ -21,7 +21,7 @@ return new class extends Migration
             // TODO add default offer image
             $table->string('cover')->nullable();
             $table->string('category_id');
-            // $table->string('subCategoryId');
+            // TODO $table->string('subCategoryId');
             $table->string('all_tags')->nullable();
             $table->integer('price');
             $table->enum('price_type', array_column(PriceTypeEnum::TYPES, 'value'))->default(PriceTypeEnum::HOUR);

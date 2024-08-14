@@ -30,42 +30,45 @@ class ChatController extends Controller
                         ->where('client_id', auth()->id())
                         ->where('offer_id', $formfields['offer_id'])
                         ->first();
+
         if($chatExists){
-            // TODO redirect to chat
-            dd('Chat exists!');
-            // return redirect()
+            return redirect()->route('profile.chat', ['id' => $chatExists->id]);
         }
 
         $formfields['client_id'] = auth()->id();
         $formfields['seller_id'] = $offer->user_id;
-        $formfields['title'] = $user->username . ' - ' . $offer->title;
+        $formfields['title'] = $user->username . ' (' . $offer->title . ')';
         
         $chat = Chat::create($formfields);
         
-        return redirect()->route('profile.chat', ['chat' => $chat->id]);
+        return redirect()->route('profile.chat', ['id' => $chat->id]);
     }
 
     public function empty(){
 
-        $allChats = Chat::select('id', 'title')
+        $allChats = Chat::select('id', 'title', 'seller_id', 'client_id')
                         ->where('seller_id', auth()->id())
                         ->orWhere('client_id', auth()->id())
+                        ->orderBy('updated_at', 'desc')
+                        ->with(['seller', 'client'])
                         ->get();
 
         return view('chat.empty', compact('allChats'));
     }
     
     public function index(Request $request){
-        // dd($request->id);
 
-        $allChats = Chat::select('id', 'title')
+        $allChats = Chat::select('id', 'title', 'seller_id', 'client_id')
                         ->where('seller_id', auth()->id())
                         ->orWhere('client_id', auth()->id())
+                        ->orderBy('updated_at', 'desc')
+                        ->with(['seller', 'client'])
                         ->get();
 
         if($request->id){
 
             $chat = Chat::where('id', $request->id)->first();
+            // TODO ograniczyć ilość widomości fetchowanych
             
             if($chat){
                 $chatTexts = $chat->chatTexts;
@@ -94,6 +97,10 @@ class ChatController extends Controller
         // Validate if user belongs to conversation
         if(auth()->id() == $usersInConversation->seller_id || auth()->id() == $usersInConversation->client_id){
             $formfields['sender_id'] = auth()->id();
+
+            // update updated at chat to be on top
+            $chat = Chat::find($formfields['chat_id']);
+            $chat->touch();
     
             $data = ChatText::create($formfields);
     
