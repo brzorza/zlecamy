@@ -11,7 +11,7 @@
             {{-- Menu sprzedawcy --}}
             <ul class="flex flex-col space-y-2 p-4 w-100">
                 <li><a href="{{ route('profile.show') }}" class="block py-2 px-4 text-white text-xl rounded hover-link underline-link"><i class="fa-solid fa-house text-lg"></i> Główna</a></li>
-                <li><a href="{{ route('profile.chat') }}" class="block py-2 px-4 text-white text-xl rounded hover-link underline-link"><i class="fa-solid fa-comments"></i> Chat</a></li>
+                <li><a href="{{ route('profile.chat.empty') }}" class="block py-2 px-4 text-white text-xl rounded hover-link underline-link"><i class="fa-solid fa-comments"></i></i> Chat</a></li>
                 <li><a href="{{ route('profile.offers') }}" class="block py-2 px-4 text-white text-xl rounded hover-link underline-link"><i class="fa-solid fa-briefcase text-lg"></i> Oferty</a></li>
                 <li><a href="#" class="block py-2 px-4 text-white text-xl rounded hover-link underline-link"><i class="fa-solid fa-folder-open text-lg"></i> Zamówienia</a></li>
                 <li><a href="#" class="block py-2 px-4 text-white text-xl rounded hover-link underline-link"><i class="fa-solid fa-chart-simple text-lg"></i> Statystyki</a></li>

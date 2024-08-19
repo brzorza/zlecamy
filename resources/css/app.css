@@ -6,6 +6,21 @@
     font-family: 'Quicksand';
 }
 
+/* Hide up and down on input type number */
+input[type="number"] {
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
+    appearance: none;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
 .profile-menu{
     height: calc(100vh - 96px);
 }
@@ -215,6 +230,12 @@ input:-internal-autofill-selected {
     appearance: menulist-button;
     background-color: #1e1e1e !important;
     color: #ffffff !important;
+}
+
+/* Offers catalog */
+.filters-buttons{
+    font-size: 18px;
+    font-weight: 900;
 }
 
 /* Single offer */
