@@ -66,7 +66,7 @@ class ChatController extends Controller
                         ->get();
 
         if($request->id){
-
+        // Render chats with chosen user
             $chat = Chat::where('id', $request->id)->first();
             // TODO ograniczyć ilość widomości fetchowanych
             
@@ -79,6 +79,7 @@ class ChatController extends Controller
             }
 
         }else{
+        // Render chats not chosen
             return view('chat.index', compact('allChats'));
         }
 

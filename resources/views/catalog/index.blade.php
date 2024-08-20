@@ -49,7 +49,7 @@
                     
                     <div class="flex flex-row gap-6">
                         <button type="submit" class="w-1/2 filters-buttons rounded-xl px-2 py-1 bg-primary text-backgroundll"><i class="fa-solid fa-magnifying-glass"> <span>Filtruj</span></i></button>
-                        <a href="{{ url()->current() }}" class="w-1/2 filters-buttons rounded-xl px-2 py-1 bg-danger text-center"><i class="fa-solid fa-x"></i> <span>Usuń</span></i></a>
+                        <a href="{{ url()->current() }}" class="w-1/2 filters-buttons rounded-xl px-2 py-1 bg-danger text-center"><i class="fa-solid fa-xmark"></i> <span>Usuń</span></i></a>
                     </div>
                 </form>
             </div>

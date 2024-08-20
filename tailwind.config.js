@@ -22,6 +22,7 @@ export default {
         background: '#121112',
         backgroundl: '#1e1e1e',
         backgroundll: '#333',
+        overlay: '#121212c0',
       },
       boxShadow: {
         'light': '0px 0px 5px 0px #9fef0020',
