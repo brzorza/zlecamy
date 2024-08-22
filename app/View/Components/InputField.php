@@ -18,8 +18,9 @@ class InputField extends Component
     public $placeholder;
     public $classes;
     public $divClasses;
+    public $max;
 
-    public function __construct($type = 'text', $name, $value = '', $label = '', $placeholder = '', $classes = '', $divClasses = ''){
+    public function __construct($type = 'text', $name, $value = '', $label = '', $placeholder = '', $classes = '', $divClasses = '', $max=''){
         $this->type = $type;
         $this->name = $name;
         $this->value = $value;
@@ -27,6 +28,7 @@ class InputField extends Component
         $this->placeholder = $placeholder;
         $this->classes = $classes;
         $this->divClasses = $divClasses;
+        $this->max = $max;
     }
 
     /**

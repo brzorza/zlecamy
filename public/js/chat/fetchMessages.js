@@ -48,5 +48,5 @@ function getMessages(){
         console.error('ERROR:', error);
     });
 }
-
+// TODO fix fetch time
 setInterval(getMessages, 5000);

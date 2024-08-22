@@ -45,3 +45,4 @@ Route::get('/profile/chat/{id}', [ChatController::class,'index'])->name('profile
 Route::get('/profile/chat', [ChatController::class,'empty'])->name('profile.chat.empty')->middleware('auth');
 Route::post('/chat/send', [ChatController::class,'sendMessage'])->name('chat.send')->middleware('auth');
 Route::get('/chat/get', [ChatController::class,'getMessages'])->name('chat.get')->middleware('auth');
+Route::post('/order/create/{id}', [ChatController::class,'createOrder'])->name('create.orfer')->middleware('auth');

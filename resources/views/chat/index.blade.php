@@ -122,11 +122,40 @@
 
     {{-- TODO Add hidden so its hidden XD --}}
     @if($chat->seller_id == auth()->id())
-        <div id="create-offer-wrapper" class=" absolute inset-0 w-[100vw] h-[100vh] z-50 flex items-center justify-center bg-overlay">
-            <div class="relative bg-background border-2 border-primary h-4/5 w-3/5 rounded-3xl py-6 px-12">
-                <i id="close-create-offer" class="fa-solid fa-xmark text-danger text-2xl absolute top-4 right-4 cursor-pointer"></i>
+        <div id="create-offer-wrapper" class="hidden absolute inset-0 w-[100vw] h-[100vh] z-10 flex items-center justify-center bg-overlay">
+            <div class="relative bg-background border-2 border-primary max-w-4xl rounded-3xl py-6 px-12">
+                <form action="{{ route('create.orfer', ['id' => $chat->id]) }}" method="POST">
+                    @csrf
+                    <i id="close-create-offer" class="fa-solid fa-xmark text-danger text-2xl absolute top-4 right-4 cursor-pointer"></i>
 
-                <h4 class="text-gray-500 text-3xl text-center mb-2">Stwórz ofertę</h4>
+                    <h4 class="text-gray-500 text-3xl text-center mb-6">Stwórz ofertę</h4>
+
+                    <p class="text-xl mb-2">{{ $chat->offer->title }}</p>
+                    <div class="flex flex-row gap-10 mb-6">
+                        <img src="{{ asset('storage/' . $chat->offer->cover) }}" alt="Obraz oferty"
+                            class="user-offers-aspect w-2/5 rounded-xl">
+                        <textarea name="description" id="description" autocomplete="off" placeholder="Opisz to zlecenie..."
+                        class="w-3/5 rounded-xl text-gray-200 text-xl px-4 py-2 min-h-36 max-w-3/4 rounded bg-backgroundl border-backgroundl 
+                        border border-primary focus:outline-none focus:border-secondary"></textarea>
+                    </div>
+
+                    <div class="flex flex-row justify-between gap-10 mb-6">
+                        <x-input-field type="number" name="price" value="{{old('price')}}" placeholder="Max 10000 PLN" label="Cena:" max="10000" 
+                        classes="w-full rounded-xl px-4 py-2 focus:border-backgroundl border-backgroundl" />
+
+                        <x-input-field type="number" name="order_ready_in" value="{{old('order_ready_in')}}" placeholder="Max 365 dni" label="Czas realizacji:" max="365" 
+                        classes="w-full rounded-xl px-4 py-2 focus:border-backgroundl border-backgroundl" />
+
+                        <x-input-field type="number" name="available_for_days" value="{{old('available_for_days')}}" placeholder="Max 30 dni" label="Dostępne przez:" max="30" 
+                        classes="w-full rounded-xl px-4 py-2 focus:border-backgroundl border-backgroundl" />
+                    </div>
+
+                    <button type="submit" 
+                    class="mt-4 px-4 py-2 border-2 border-primary hover:bg-backgroundl bg-primary text-background hover:text-gray-200 text-xl font-semibold rounded-full w-full">
+                        Wyślij!
+                    </button>
+
+                </form>
             </div>
         </div>
     @endif
@@ -137,17 +166,4 @@
 <script src="{{ asset('js/chat/chatScroll.js') }}"></script>
 <script src="{{ asset('js/chat/sendMessage.js') }}"></script>
 <script src="{{ asset('js/chat/fetchMessages.js') }}"></script>
-<script>
-    const openCreator = document.getElementById('open-create-offer');
-    const closeCreator = document.getElementById('close-create-offer');
-
-    function toggleClass() {
-        const targetElement = document.getElementById('create-offer-wrapper');
-
-        targetElement.classList.toggle('hidden');
-    }
-
-    openCreator.addEventListener('click', toggleClass);
-    closeCreator.addEventListener('click', toggleClass);
-
-</script>
+<script src="{{ asset('js/chat/showOfferCreateModal.js') }}"></script>
