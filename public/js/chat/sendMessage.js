@@ -5,12 +5,12 @@
             event.preventDefault();
     
             const chat_id = document.getElementById('chat_id').value;
-            const text = document.getElementById('text').value;
+            const text = document.getElementById('value').value;
     
             // Get form data
             const formData = new FormData();
             formData.append('chat_id', chat_id);
-            formData.append('text', text);
+            formData.append('value', text);
     
             fetch('/chat/send', {
                 method: 'POST',
@@ -27,7 +27,7 @@
             })
             .then(data => {
                 // Handle success
-                
+                console.log(data);
                 // Empty chat box
                 const chatContainer = document.getElementById('chatContainer');
                 chatContainer.innerHTML = '';
@@ -48,7 +48,7 @@
                     const message = `
                             <div class="w-full">
                                 <p class="w-4/5 relative ${item.sender_id === myId ? 'ml-auto bg-backgroundl' : 'mr-auto bg-backgroundll'} mt-4 text-justify text-white border border-primary rounded-lg p-4">
-                                    ${item.text}
+                                    ${item.value}
                                     <span class="text-date">${year} ${capitalizedMonth} ${day} ${hours}:${minutes}</span>
                                 </p>
                             </div>
@@ -56,7 +56,7 @@
                     chatContainer.insertAdjacentHTML('beforeend', message);
                 })
     
-                document.getElementById('text').value = '';
+                document.getElementById('value').value = '';
                 scrollToBottom();
     
             })

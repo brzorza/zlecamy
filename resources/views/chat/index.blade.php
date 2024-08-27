@@ -51,44 +51,61 @@
                                 ?>
 
                                     @if($text->sender_id == auth()->id())
-                                    <div class="w-full">
-                                        <p class="w-4/5 relative ml-auto mt-4 text-justify text-white bg-backgroundl border border-primary rounded-lg p-4">
-                                            {{$text->text}}
-                                            <span class="text-date">{{ $date_pl }}</span>
-                                        </p>
-                                    </div>
+                                        
+                                            <div class="w-full">
+                                                <p class="w-4/5 relative ml-auto mt-4 text-justify text-white bg-backgroundl border border-primary rounded-lg p-4">
+                                                    {{$text->value}}
+                                                    <span class="text-date">{{ $date_pl }}</span>
+                                                </p>
+                                            </div>
+                                        
                                     @else
-                                        <div class="w-full">
-                                            <p class="w-4/5 relative mr-auto mt-4 text-justify text-white bg-backgroundll border border-primary rounded-lg p-4">
-                                                {{$text->text}}
-                                                <span class="text-date">{{ $date_pl }}</span>
-                                            </p>
-                                        </div>
+                                        
+                                            <div class="w-full">
+                                                <p class="w-4/5 relative mr-auto mt-4 text-justify text-white bg-backgroundll border border-primary rounded-lg p-4">
+                                                    {{$text->value}}
+                                                    <span class="text-date">{{ $date_pl }}</span>
+                                                </p>
+                                            </div>
+                                        
                                     @endif
                                 @endforeach
 
                             </div>
                             <div class="p-4">
-                                <form action="{{ route('chat.send') }}" method="POST" id="messageForm">
-                                    @csrf
-                                    <div class="w-full h-12 flex items-center border border-primary rounded-lg ">
+                                <div class="w-full flex flex-col items-center border border-primary rounded-lg ">
+                                    
+                                    <form action="{{ route('chat.send') }}" method="POST" id="messageForm" class="w-full">
+                                        @csrf
+                                        <div class="flex flex-row p-2 w-full">
+                                            <input type="hidden" name="chat_id" id="chat_id" value="{{ $chat->id }}">
+                                            <input type="text" placeholder="Widomość..." name="value" id="value" autocomplete="off"
+                                            class="bg-background w-full focus:outline-none">
+                                            
+                                            <button id="sendMessage" type="submit"
+                                            class="bg-primary hover:bg-primaryh float-right h-full text-background font-bold px-12 py-2 rounded">
+                                                Wyślij
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                    <div class="w-full flex flex-row p-2">
                                         @if($chat->seller_id == auth()->id())
-                                            <div id="open-create-offer" class="border-2 border-primary mx-2 mr-4 px-2 rounded-lg whitespace-nowrap cursor-pointer">
+                                            <div id="open-create-offer" class="border-2 border-primary px-2 mr-2 rounded-lg whitespace-nowrap cursor-pointer">
                                                 Stwórz ofertę
                                             </div>
                                         @endif
 
-                                        <input type="hidden" name="chat_id" id="chat_id" value="{{ $chat->id }}">
-                                        <input type="text" placeholder="Widomość..." name="text" id="text" autocomplete="off"
-                                        class="bg-background w-full focus:outline-none">
-                                        
-                                        <button id="sendMessage"
-                                        type="submit"
-                                        class="bg-primary hover:bg-primaryh float-right h-full text-background font-bold px-12 rounded">
-                                            Wyślij
-                                        </button>
+                                        <div class="mx-2 cursor-pointer">
+                                            <i class="fa-regular fa-image"></i>
+                                        </div>
+
+                                        <div class="mx-2 cursor-pointer">
+                                            <i class="fa-solid fa-paperclip"></i>
+                                        </div>
                                     </div>
-                                </form>
+
+                                </div>
                             </div>
                         </div>
                     @else

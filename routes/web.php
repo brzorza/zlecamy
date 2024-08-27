@@ -1,9 +1,11 @@
 <?php
 
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\UsersBrowseController;
@@ -45,4 +47,6 @@ Route::get('/profile/chat/{id}', [ChatController::class,'index'])->name('profile
 Route::get('/profile/chat', [ChatController::class,'empty'])->name('profile.chat.empty')->middleware('auth');
 Route::post('/chat/send', [ChatController::class,'sendMessage'])->name('chat.send')->middleware('auth');
 Route::get('/chat/get', [ChatController::class,'getMessages'])->name('chat.get')->middleware('auth');
-Route::post('/order/create/{id}', [ChatController::class,'createOrder'])->name('create.orfer')->middleware('auth');
+
+// Order
+Route::post('/order/create/{id}', [OrderController::class,'createOrder'])->name('create.orfer')->middleware('auth');

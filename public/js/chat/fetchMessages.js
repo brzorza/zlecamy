@@ -33,7 +33,7 @@ function getMessages(){
             const message = `
                     <div class="w-full">
                         <p class="w-4/5 relative ${item.sender_id === myId ? 'ml-auto bg-backgroundl' : 'mr-auto bg-backgroundll'} mt-4 text-justify text-white border border-primary rounded-lg p-4">
-                            ${item.text}
+                            ${item.value}
                             <span class="text-date">${year} ${capitalizedMonth} ${day} ${hours}:${minutes}</span>
                         </p>
                     </div>

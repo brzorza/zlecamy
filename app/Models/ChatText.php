@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use App\Enums\OrderStatusEnum;
+use App\Enums\ChatTextTypeEnum;
+use Illuminate\Database\Eloquent\Model;
 
 class ChatText extends Model
 {
@@ -11,8 +13,12 @@ class ChatText extends Model
 
     protected $fillable = [
         'chat_id',
-        'text',
+        'value',
         'sender_id',
+    ];
+
+    protected $casts = [
+        'type' => ChatTextTypeEnum::class,
     ];
 
     public function chat(){
