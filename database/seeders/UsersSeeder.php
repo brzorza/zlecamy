@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserTypeEnum;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -17,6 +18,7 @@ class UsersSeeder extends Seeder
                 'email' => 'wiktorbrzoza13@gmail.com',
                 'phone_number' => '231123544',
                 'password' => Hash::make('123123123'),
+                'type' => UserTypeEnum::SELLER,
                 'profile_picture' => 'images/profile_pictures/no-image.jpg',
             ],
             [
@@ -24,6 +26,7 @@ class UsersSeeder extends Seeder
                 'email' => 'wiktoriapajdo@gmail.com',
                 'phone_number' => '231123544',
                 'password' => Hash::make('123123123'),
+                'type' => UserTypeEnum::USER,
                 'profile_picture' => 'images/profile_pictures/no-image.jpg',
             ],
             [
@@ -31,6 +34,7 @@ class UsersSeeder extends Seeder
                 'email' => 'test@gmail.com',
                 'phone_number' => '231123544',
                 'password' => Hash::make('123123123'),
+                'type' => UserTypeEnum::USER,
                 'profile_picture' => 'images/profile_pictures/no-image.jpg',
             ],
             [
@@ -38,6 +42,7 @@ class UsersSeeder extends Seeder
                 'email' => 'next_bro@gmail.com',
                 'phone_number' => '231123544',
                 'password' => Hash::make('123123123'),
+                'type' => UserTypeEnum::USER,
                 'profile_picture' => 'images/profile_pictures/no-image.jpg',
             ],
             [
@@ -45,6 +50,7 @@ class UsersSeeder extends Seeder
                 'email' => 'krzysztofk@gmail.com',
                 'phone_number' => '231123544',
                 'password' => Hash::make('123123123'),
+                'type' => UserTypeEnum::USER,
                 'profile_picture' => 'images/profile_pictures/no-image.jpg',
             ],
         ]);

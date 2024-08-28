@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Language;
+use App\Enums\UserTypeEnum;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,6 +24,10 @@ class User extends Authenticatable
         'email',
         'password',
         'type',
+    ];
+
+    protected $casts = [
+        'type' => UserTypeEnum::class,
     ];
 
     /**

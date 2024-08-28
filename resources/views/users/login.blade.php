@@ -89,8 +89,8 @@
                         @enderror
                     </div>
                     <div class="mb-10">
-                        <label for="type">Chcesz sprzedawać?</label>
                         <input name='type' type='checkbox'/>
+                        <label for="type">Zarejestruj się jako sprzedawca</label>
                     </div>
                     <div class="flex items-center justify-between">
                         <button type="submit" class="w-full mt-4 px-4 py-2 bg-primary border-2 border-primary hover:bg-backgroundl hover:text-gray-200 text-backgroundl text-xl font-semibold rounded">Zarejestruj się</button>

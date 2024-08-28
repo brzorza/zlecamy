@@ -1,4 +1,6 @@
 <?php
+    use App\Enums\ChatTextTypeEnum;
+    
     $months = [
         'January' => 'Sty',
         'February' => 'Lut',
@@ -36,7 +38,7 @@
 
                 <div class="w-3/5">
                     @if(isset($chat))
-                    {{-- Chat with chosen user --}}
+                        {{-- Chat with chosen user --}}
                         <div class="border border-primary rounded-lg bg-background">
                             <div class="rounded-t-xl px-4 py-6 flex bg-backgroundl">
                                 <p>{{ $chat->title }}</p>
@@ -45,30 +47,38 @@
 
                                 @foreach ($chatTexts as $text)
 
-                                <?php 
-                                    $date = $text->created_at->format('Y F d H:i');
-                                    $date_pl = str_replace(array_keys($months), array_values($months), $date);
-                                ?>
+                                    <?php 
+                                        $date = $text->created_at->format('Y F d H:i');
+                                        $date_pl = str_replace(array_keys($months), array_values($months), $date);
+                                    ?>
 
-                                    @if($text->sender_id == auth()->id())
-                                        
+                                    @if($text->type === ChatTextTypeEnum::TEXT)
+                                        @if($text->sender_id == auth()->id())
                                             <div class="w-full">
                                                 <p class="w-4/5 relative ml-auto mt-4 text-justify text-white bg-backgroundl border border-primary rounded-lg p-4">
                                                     {{$text->value}}
                                                     <span class="text-date">{{ $date_pl }}</span>
                                                 </p>
                                             </div>
-                                        
-                                    @else
-                                        
+                                        @else
                                             <div class="w-full">
                                                 <p class="w-4/5 relative mr-auto mt-4 text-justify text-white bg-backgroundll border border-primary rounded-lg p-4">
                                                     {{$text->value}}
                                                     <span class="text-date">{{ $date_pl }}</span>
                                                 </p>
                                             </div>
-                                        
+                                        @endif
+                                    @elseif($text->type === ChatTextTypeEnum::ORDER)
+                                        <div class="w-full">
+                                            <div class="w-2/5 relative mx-auto mt-4 text-center bg-background border-2 border-primary rounded-lg p-6">
+                                                <p class="text-xl font-semibold text-white ">Status zamówienia</p>
+                                                <p class="text-base font-normal mb-6">{{$text->value}}</p>
+                                                {{-- TODO add link do sprawdzenia zamówienia i w fetchMessage.js --}}
+                                                <a href="#" class="border-2 border-primary bg-primary hover:bg-background hover:text-white rounded text-background font-semibold py-2 px-12 min-w-5 w-1/2 mx-auto font-semibold">Zobacz</a>
+                                            </div>
+                                        </div>
                                     @endif
+
                                 @endforeach
 
                             </div>

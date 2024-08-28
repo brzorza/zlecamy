@@ -15,6 +15,7 @@ class ChatText extends Model
         'chat_id',
         'value',
         'sender_id',
+        'type',
     ];
 
     protected $casts = [

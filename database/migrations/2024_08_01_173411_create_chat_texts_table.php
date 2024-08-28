@@ -13,7 +13,6 @@ class CreateChatTextsTable extends Migration
             $table->id()->primary();
             $table->uuid('chat_id');
             $table->enum('type', array_column(ChatTextTypeEnum::TYPES, 'value'))->default(ChatTextTypeEnum::TEXT);
-            // $table->string('type');
             $table->string('value');
             $table->integer('sender_id');
             $table->timestamps();

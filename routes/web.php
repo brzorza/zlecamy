@@ -24,6 +24,7 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout')->middl
 Route::get('/profile', [UserController::class,'show'])->name('profile.show')->middleware('auth');
 Route::get('/profile/edit', [UserController::class,'showEdit'])->name('profile.showEdit')->middleware('auth');
 Route::post('/profile', [UserController::class,'edit'])->name('profile.edit')->middleware('auth');
+// Sellers only
 Route::get('/profile/offers', [UserController::class,'offers'])->name('profile.offers')->middleware('auth');
 Route::get('/profile/offers/add', [OfferController::class,'create'])->name('profile.offers.add')->middleware('auth');
 Route::post('/profile/offers/add', [OfferController::class,'store'])->name('profile.offers.store')->middleware('auth');
