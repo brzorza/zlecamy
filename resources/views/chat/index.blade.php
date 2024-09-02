@@ -151,7 +151,7 @@
     @if($chat->seller_id == auth()->id())
         <div id="create-offer-wrapper" class="hidden absolute inset-0 w-[100vw] h-[100vh] z-10 flex items-center justify-center bg-overlay">
             <div class="relative bg-background border-2 border-primary max-w-4xl rounded-3xl py-6 px-12">
-                <form action="{{ route('create.orfer', ['id' => $chat->id]) }}" method="POST">
+                <form action="{{ route('create.order', ['id' => $chat->id]) }}" method="POST">
                     @csrf
                     <i id="close-create-offer" class="fa-solid fa-xmark text-danger text-2xl absolute top-4 right-4 cursor-pointer"></i>
 

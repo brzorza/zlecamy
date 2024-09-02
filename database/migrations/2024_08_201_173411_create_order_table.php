@@ -16,9 +16,9 @@ return new class extends Migration
             $table->foreignId('client_id')->references('id')->on('users');
             $table->string('description');
             $table->integer('price');
-            $table->integer('order_ready_in'); //TODO can delete this also in cotroller
+            $table->integer('order_ready_in');
             $table->date('available_until');
-            $table->date('deadline');
+            $table->date('deadline')->nullable();
             $table->enum('status', array_column(OrderStatusEnum::TYPES, 'value'))->default(OrderStatusEnum::NEW);
             $table->timestamps();
         });

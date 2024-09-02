@@ -14,7 +14,7 @@
                             value="{{ request()->get('query') }}"
                             class="bg-background border border-primary px-4 py-2 mt-2 mb-4 rounded-xl focus:outline-none focus:border-secondary">
                     
-                    {{-- TODO select --}}
+                    {{-- TODO select z miejscowościami--}}
                     <label class="text-sm" for="miejsce" class="">Miejsce:</label>
                     <input type="text" name="miejsce" 
                             placeholder="Miejsce..." 

@@ -52,6 +52,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function isUser(){
+        return $this->type === UserTypeEnum::USER;
+    }
+    public function isSeller(){
+        return $this->type === UserTypeEnum::SELLER;
+    }
     public function offers(): HasMany{
         return $this->hasMany(Offer::class);
     }

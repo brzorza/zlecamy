@@ -43,4 +43,11 @@ class Order extends Model
             }
         });
     }
+
+    public function client(){
+        return $this->belongsTo(User::class);
+    }
+    public function seller(){
+        return $this->belongsTo(User::class);
+    }
 }

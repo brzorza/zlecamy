@@ -4,16 +4,31 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Chat;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\ChatText;
 use Illuminate\Http\Request;
+use App\Enums\OrderStatusEnum;
 use App\Enums\ChatTextTypeEnum;
+use App\Enums\UserTypeEnum;
 
 class OrderController extends Controller
 {
+        public function index(){
+
+            $userStatus = User::select('type')->findOrFail(auth()->id());
+
+            if($userStatus->type == UserTypeEnum::SELLER){
+                $orders = Order::where('seller_id', auth()->id())->with(['client:id,username'])->get();
+            }elseif($userStatus->type == UserTypeEnum::USER){
+                $orders = Order::where('client_id', auth()->id())->with(['seller:id,username'])->get();
+            }
+            return view('users.orders', compact(['orders']));
+        }
+
         public function createOrder(Request $request){
         
-            $chat = Chat::select('seller_id', 'client_id')->where('id', $request['id'])->firstOrFail();
+            $chat = Chat::select('id','seller_id', 'client_id')->where('id', $request['id'])->firstOrFail();
             
             $auth_id = auth()->id();
             
@@ -31,24 +46,27 @@ class OrderController extends Controller
                     'available_for_days' => 'required|integer|max:30',
                 ]);
     
-                $sumOfOrderReadyIn = Order::where('seller_id', $auth_id)->sum('order_ready_in');
+                // $sumOfOrderReadyIn = Order::where('seller_id', $auth_id)->sum('order_ready_in');
     
-                if($sumOfOrderReadyIn){
-                    $sumOfOrderReadyIn += $formfields['order_ready_in'];
-                    $deadline = Carbon::today()->addDays($sumOfOrderReadyIn);
-                }else{
-                    $deadline = Carbon::today()->addDays((int)$formfields['order_ready_in']);
-                }
+                // if($sumOfOrderReadyIn){
+                //     $sumOfOrderReadyIn += $formfields['order_ready_in'];
+                //     $deadline = Carbon::today()->addDays($sumOfOrderReadyIn);
+                //     $formfields['deadline'] = $deadline;
+                // }else{
+                //     $deadline = Carbon::today()->addDays((int)$formfields['order_ready_in']);
+                //     $formfields['deadline'] = $deadline;
+                // }
     
                 $formfields['chat_id'] = $request->id;
                 $formfields['seller_id'] = $chat->seller_id;
                 $formfields['client_id'] = $chat->client_id;
                 $formfields['available_until'] = Carbon::today()->addDays((int)$formfields['available_for_days']);
-                $formfields['deadline'] = $deadline;
     
                 $order = Order::create($formfields);
 
                 $this->createMessageInChat($request->id, $chat->seller_id);
+
+                $chat->touch();
     
                 return redirect()->route('profile.chat', ['id' => $request->id])->with('success', 'Oferta została stworzona!');
             }
@@ -57,6 +75,54 @@ class OrderController extends Controller
         }else{
             abort(403);
         }
+    }
+
+    public function changeOrderStatus(Request $request){
+        
+        $formfields = $request->validate([
+            'order_id' => 'required|string|uuid',
+        ]);
+
+        $order = Order::findOrFail($request->order_id);
+
+        if($order->seller_id == auth()->id()){
+            // User is seller
+            
+            $formfields = $request->validate([
+                'status' => 'required|string|in:cancel,in_proggres,finish',
+            ]);
+
+            $this->validateStatusChange($order, $formfields['status'], 'seller');
+
+        }elseif($order->client_id == auth()->id()){
+            // User is client
+            
+            $formfields = $request->validate([
+                'status' => 'required|string|in:cancel,pay',
+            ]);
+
+            $this->validateStatusChange($order, $formfields['status'], 'client');
+
+        }else{
+            abort(403);
+        }
+
+        return redirect()->back();
+
+    } 
+
+    public function getOrderInfo(Request $request){
+
+        $order = Order::findOrFail($request->id);
+
+        if($order->seller_id == auth()->id() || $order->client_id == auth()->id()){
+            return response()->json([
+                'data' => $order
+            ]);
+        }else{
+            abort(403);
+        }
+
     }
 
     private function createMessageInChat($chat_id, $sender_id){
@@ -68,6 +134,69 @@ class OrderController extends Controller
         $data['value'] = 'Nowe zamówienie';
 
         $new_order = ChatText::create($data);
+
+    }
+
+    private function validateStatusChange($order, $status, $userStatus){
+
+        if($userStatus == 'seller'){
+            
+            switch (true) {
+                // Seller Order(new) -> Order(canceled)
+                case ($order->status === OrderStatusEnum::NEW->value && $status == 'cancel'):
+                    $order->status = OrderStatusEnum::CANCELLED;
+                    break;
+                    
+                case ($order->status === OrderStatusEnum::PAID->value && $status == 'cancel'):
+                    // Seller Order(paid) -> Order(canceled)
+                    $order->status = OrderStatusEnum::CANCELLED;
+                    break;
+
+                case ($order->status === OrderStatusEnum::PAID->value && $status == 'in_proggres'):
+                    // Seller Order(paid) -> Order(in_proggres)
+                    $order->status = OrderStatusEnum::IN_PROGRESS;
+                    break;
+
+                case ($order->status === OrderStatusEnum::PAID->value && $status == 'finish'):
+                    // Seller Order(paid) -> Order(finished)
+                    $order->status = OrderStatusEnum::FINISHED;
+                    break;
+
+                case ($order->status === OrderStatusEnum::IN_PROGRESS->value && $status == 'cancel'):
+                    // Seller Order(in_proggress) -> Order(canceled)
+                    $order->status = OrderStatusEnum::CANCELLED;
+                    break;
+
+                case ($order->status === OrderStatusEnum::IN_PROGRESS->value && $status == 'finish'):
+                    // Seller Order(in_proggress) -> Order(finished)
+                    $order->status = OrderStatusEnum::FINISHED;
+                    break;
+                    
+                default:
+                    // Default case
+                    break;
+            }
+
+        }elseif($userStatus == 'client'){
+
+            switch (true) {
+                case ($order->status === OrderStatusEnum::NEW->value && $status == 'pay'):
+                    // TODO dodać płatność
+                    break;
+
+                // Client Order(new) -> Order(canceled)
+                case ($order->status === OrderStatusEnum::NEW->value && $status == 'cancel'):
+                    $order->status = OrderStatusEnum::CANCELLED;
+                    break;
+
+                default:
+                    // Default case
+                    break;
+            }
+
+        }
+
+        $order->save();
 
     }
 }
