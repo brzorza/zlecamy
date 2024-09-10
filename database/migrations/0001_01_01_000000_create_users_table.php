@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Enums\UserTypeEnum;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -19,7 +20,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('surname')->nullable();
             $table->string('profile_picture')->nullable();
-            $table->string('type')->default('user');
+            $table->enum('type', array_column(UserTypeEnum::TYPES, 'value'))->default(UserTypeEnum::USER);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

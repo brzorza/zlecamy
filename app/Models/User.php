@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Language;
+use App\Enums\UserTypeEnum;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,6 +24,10 @@ class User extends Authenticatable
         'email',
         'password',
         'type',
+    ];
+
+    protected $casts = [
+        'type' => UserTypeEnum::class,
     ];
 
     /**
@@ -46,6 +51,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function isUser(){
+        return $this->type === UserTypeEnum::USER;
+    }
+    public function isSeller(){
+        return $this->type === UserTypeEnum::SELLER;
     }
     public function offers(): HasMany{
         return $this->hasMany(Offer::class);

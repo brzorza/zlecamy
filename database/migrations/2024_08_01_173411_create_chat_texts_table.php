@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Enums\ChatTextTypeEnum;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateChatTextsTable extends Migration
 {
@@ -11,7 +12,8 @@ class CreateChatTextsTable extends Migration
         Schema::create('chat_texts', function (Blueprint $table) {
             $table->id()->primary();
             $table->uuid('chat_id');
-            $table->string('text');
+            $table->enum('type', array_column(ChatTextTypeEnum::TYPES, 'value'))->default(ChatTextTypeEnum::TEXT);
+            $table->string('value');
             $table->integer('sender_id');
             $table->timestamps();
 

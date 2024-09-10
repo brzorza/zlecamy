@@ -291,3 +291,14 @@ input:-internal-autofill-selected {
     font-size: 12px;
     color: white;
 }
+/* Orders */
+#orders-table{
+    width: 100%;
+}
+#orders-table tbody tr:first-child{
+    border-radius: 10px;
+}
+#orders-table thead, #orders-table thead tr th, #orders-table tbody > tr > td{
+    text-align: left;
+    padding: 20px;
+}

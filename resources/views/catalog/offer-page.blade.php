@@ -10,19 +10,18 @@
                         <img src="/storage/{{$offer->user->profile_picture}}" alt="Zdjęcie profilowe użytkownika" class="w-20 rounded-2xl">
                         <div class="w-3/5 flex flex-col mx-6 justify-center">
                             <a href="{{ route('user.show', ['username' => $offer->user->username]) }}" class="text-primary hover-link">{{$offer->user->username}}</a>
-                            {{-- TODO skontaktuj się --}}
                             <form action="{{ route('chat.create') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name='offer_id' value="{{$offer->id}}">
                                 <button type="submit" 
-                                class="w-full mt-2 border border-primary text-xsm text-background bg-primary hover:bg-backgroundl hover:text-gray-200 text-md font-semibold rounded-full">
+                                class="w-full mt-2 border border-primary text-background bg-primary hover:bg-backgroundl hover:text-gray-200 text-md font-semibold rounded-full">
                                     Skontatuj się
                                 </button>
                             </form>
                         </div>
                     </div>
                 </div>
-                <div class="w-full pr-2 flex flex-col mt-6 gap-4">
+                <div class="w-full pr-2 flex gap-4 flex-col mt-6">
                     {{-- TODO dodać typ --}}
                     <x-offer.offer-attributes>
                         <p class="w-2/5">Typ: </p>
@@ -103,7 +102,14 @@
                             <p class="w-2/5">12</p>
                         </x-offer.offer-attributes>
                         {{-- TODO link do zamówienia --}}
-                        <x-buttons.success-full link='#' classes="h-10 font-semibold">Zamów</x-buttons.success-full>
+                        <form action="{{ route('chat.create') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name='offer_id' value="{{$offer->id}}">
+                            <button type="submit" 
+                            class="w-full mt-2 py-2 border border-primary text-background bg-primary hover:bg-backgroundl hover:text-gray-200 text-md font-bold rounded-full">
+                                Zamów
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -7,5 +7,9 @@ function toggleClass() {
     targetElement.classList.toggle('hidden');
 }
 
-openCreator.addEventListener('click', toggleClass);
-closeCreator.addEventListener('click', toggleClass);
+if(openCreator){
+    openCreator.addEventListener('click', toggleClass);
+}
+if(closeCreator){
+    closeCreator.addEventListener('click', toggleClass);
+}

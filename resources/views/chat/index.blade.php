@@ -1,4 +1,6 @@
 <?php
+    use App\Enums\ChatTextTypeEnum;
+    
     $months = [
         'January' => 'Sty',
         'February' => 'Lut',
@@ -36,7 +38,7 @@
 
                 <div class="w-3/5">
                     @if(isset($chat))
-                    {{-- Chat with chosen user --}}
+                        {{-- Chat with chosen user --}}
                         <div class="border border-primary rounded-lg bg-background">
                             <div class="rounded-t-xl px-4 py-6 flex bg-backgroundl">
                                 <p>{{ $chat->title }}</p>
@@ -45,50 +47,75 @@
 
                                 @foreach ($chatTexts as $text)
 
-                                <?php 
-                                    $date = $text->created_at->format('Y F d H:i');
-                                    $date_pl = str_replace(array_keys($months), array_values($months), $date);
-                                ?>
+                                    <?php 
+                                        $date = $text->created_at->format('Y F d H:i');
+                                        $date_pl = str_replace(array_keys($months), array_values($months), $date);
+                                    ?>
 
-                                    @if($text->sender_id == auth()->id())
-                                    <div class="w-full">
-                                        <p class="w-4/5 relative ml-auto mt-4 text-justify text-white bg-backgroundl border border-primary rounded-lg p-4">
-                                            {{$text->text}}
-                                            <span class="text-date">{{ $date_pl }}</span>
-                                        </p>
-                                    </div>
-                                    @else
+                                    @if($text->type === ChatTextTypeEnum::TEXT)
+                                        @if($text->sender_id == auth()->id())
+                                            <div class="w-full">
+                                                <p class="w-4/5 relative ml-auto mt-4 text-justify text-white bg-backgroundl border border-primary rounded-lg p-4">
+                                                    {{$text->value}}
+                                                    <span class="text-date">{{ $date_pl }}</span>
+                                                </p>
+                                            </div>
+                                        @else
+                                            <div class="w-full">
+                                                <p class="w-4/5 relative mr-auto mt-4 text-justify text-white bg-backgroundll border border-primary rounded-lg p-4">
+                                                    {{$text->value}}
+                                                    <span class="text-date">{{ $date_pl }}</span>
+                                                </p>
+                                            </div>
+                                        @endif
+                                    @elseif($text->type === ChatTextTypeEnum::ORDER)
                                         <div class="w-full">
-                                            <p class="w-4/5 relative mr-auto mt-4 text-justify text-white bg-backgroundll border border-primary rounded-lg p-4">
-                                                {{$text->text}}
-                                                <span class="text-date">{{ $date_pl }}</span>
-                                            </p>
+                                            <div class="w-2/5 relative mx-auto mt-4 text-center bg-background border-2 border-primary rounded-lg p-6">
+                                                <p class="text-xl font-semibold text-white ">Status zamówienia</p>
+                                                <p class="text-base font-normal mb-6">{{$text->value}}</p>
+                                                {{-- TODO add link do sprawdzenia zamówienia i w fetchMessage.js --}}
+                                                <a href="{{ route('profile.orders') }}" class="border-2 border-primary bg-primary hover:bg-background hover:text-white rounded text-background font-semibold py-2 px-12 min-w-5 w-1/2 mx-auto font-semibold">Zobacz</a>
+                                            </div>
                                         </div>
                                     @endif
+
                                 @endforeach
 
                             </div>
                             <div class="p-4">
-                                <form action="{{ route('chat.send') }}" method="POST" id="messageForm">
-                                    @csrf
-                                    <div class="w-full h-12 flex items-center border border-primary rounded-lg ">
+                                <div class="w-full flex flex-col items-center border border-primary rounded-lg ">
+                                    
+                                    <form action="{{ route('chat.send') }}" method="POST" id="messageForm" class="w-full">
+                                        @csrf
+                                        <div class="flex flex-row p-2 w-full">
+                                            <input type="hidden" name="chat_id" id="chat_id" value="{{ $chat->id }}">
+                                            <input type="text" placeholder="Widomość..." name="value" id="value" autocomplete="off"
+                                            class="bg-background w-full focus:outline-none">
+                                            
+                                            <button id="sendMessage" type="submit"
+                                            class="bg-primary hover:bg-primaryh float-right h-full text-background font-bold px-12 py-2 rounded">
+                                                Wyślij
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                    <div class="w-full flex flex-row p-2">
                                         @if($chat->seller_id == auth()->id())
-                                            <div id="open-create-offer" class="border-2 border-primary mx-2 mr-4 px-2 rounded-lg whitespace-nowrap cursor-pointer">
+                                            <div id="open-create-offer" class="border-2 border-primary px-2 mr-2 rounded-lg whitespace-nowrap cursor-pointer">
                                                 Stwórz ofertę
                                             </div>
                                         @endif
 
-                                        <input type="hidden" name="chat_id" id="chat_id" value="{{ $chat->id }}">
-                                        <input type="text" placeholder="Widomość..." name="text" id="text" autocomplete="off"
-                                        class="bg-background w-full focus:outline-none">
-                                        
-                                        <button id="sendMessage"
-                                        type="submit"
-                                        class="bg-primary hover:bg-primaryh float-right h-full text-background font-bold px-12 rounded">
-                                            Wyślij
-                                        </button>
+                                        <div class="mx-2 cursor-pointer">
+                                            <i class="fa-regular fa-image"></i>
+                                        </div>
+
+                                        <div class="mx-2 cursor-pointer">
+                                            <i class="fa-solid fa-paperclip"></i>
+                                        </div>
                                     </div>
-                                </form>
+
+                                </div>
                             </div>
                         </div>
                     @else
@@ -124,7 +151,7 @@
     @if($chat->seller_id == auth()->id())
         <div id="create-offer-wrapper" class="hidden absolute inset-0 w-[100vw] h-[100vh] z-10 flex items-center justify-center bg-overlay">
             <div class="relative bg-background border-2 border-primary max-w-4xl rounded-3xl py-6 px-12">
-                <form action="{{ route('create.orfer', ['id' => $chat->id]) }}" method="POST">
+                <form action="{{ route('create.order', ['id' => $chat->id]) }}" method="POST">
                     @csrf
                     <i id="close-create-offer" class="fa-solid fa-xmark text-danger text-2xl absolute top-4 right-4 cursor-pointer"></i>
 

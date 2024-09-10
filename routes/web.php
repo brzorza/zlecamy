@@ -1,9 +1,12 @@
 <?php
 
+use App\Enums\UserTypeEnum;
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\UsersBrowseController;
@@ -22,6 +25,7 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout')->middl
 Route::get('/profile', [UserController::class,'show'])->name('profile.show')->middleware('auth');
 Route::get('/profile/edit', [UserController::class,'showEdit'])->name('profile.showEdit')->middleware('auth');
 Route::post('/profile', [UserController::class,'edit'])->name('profile.edit')->middleware('auth');
+// Sellers only
 Route::get('/profile/offers', [UserController::class,'offers'])->name('profile.offers')->middleware('auth');
 Route::get('/profile/offers/add', [OfferController::class,'create'])->name('profile.offers.add')->middleware('auth');
 Route::post('/profile/offers/add', [OfferController::class,'store'])->name('profile.offers.store')->middleware('auth');
@@ -40,9 +44,19 @@ Route::get('/offer/{id}', [OfferCatalogController::class,'showSingle'])->name('c
 Route::post('/newsletter', [NewsletterController::class,'addUser'])->name('newsletter');
 
 // Chat
-Route::post('/chat/create', [ChatController::class,'create'])->name('chat.create');
+Route::post('/chat/create', [ChatController::class,'create'])->name('chat.create')->middleware('auth');
 Route::get('/profile/chat/{id}', [ChatController::class,'index'])->name('profile.chat')->middleware('auth');
 Route::get('/profile/chat', [ChatController::class,'empty'])->name('profile.chat.empty')->middleware('auth');
 Route::post('/chat/send', [ChatController::class,'sendMessage'])->name('chat.send')->middleware('auth');
 Route::get('/chat/get', [ChatController::class,'getMessages'])->name('chat.get')->middleware('auth');
-Route::post('/order/create/{id}', [ChatController::class,'createOrder'])->name('create.orfer')->middleware('auth');
+
+// Order
+Route::post('/order/create/{id}', [OrderController::class,'createOrder'])->name('create.order')->middleware('auth');
+Route::get('/order/show/{id}', [OrderController::class,'getOrderInfo'])->name('orders.info')->middleware('auth');
+
+Route::get('/profile/orders', [OrderController::class,'index'])->name('profile.orders')->middleware('auth');
+Route::get('/profile/orders/{id}', [OrderController::class,'singleOrder'])->name('profile.single.order')->middleware('auth');
+Route::post('/order/changestatus', [OrderController::class,'changeOrderStatus'])->name('change.order.status')->middleware('auth');
+Route::post('/order/pay/{id}', [OrderController::class,'payForOrder'])->name('order.pay')->middleware('auth');
+
+// TODO create better policies

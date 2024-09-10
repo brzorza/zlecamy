@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserTypeEnum;
 use App\Models\Language;
 use App\Models\LanguageProficiency;
 use App\Models\User;
@@ -30,7 +31,7 @@ class UserController extends Controller
         $formfields['password'] = bcrypt($formfields['password']);
         
         //Add user type
-        $formfields['type'] = isset($request->type) ? 'seller' : 'user';
+        $formfields['type'] = isset($request->type) ? UserTypeEnum::SELLER : UserTypeEnum::USER;
         
         // Create user
         $user = User::create($formfields);
