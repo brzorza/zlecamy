@@ -74,7 +74,7 @@
                                                 <p class="text-xl font-semibold text-white ">Status zamówienia</p>
                                                 <p class="text-base font-normal mb-6">{{$text->value}}</p>
                                                 {{-- TODO add link do sprawdzenia zamówienia i w fetchMessage.js --}}
-                                                <a href="#" class="border-2 border-primary bg-primary hover:bg-background hover:text-white rounded text-background font-semibold py-2 px-12 min-w-5 w-1/2 mx-auto font-semibold">Zobacz</a>
+                                                <a href="{{ route('profile.orders') }}" class="border-2 border-primary bg-primary hover:bg-background hover:text-white rounded text-background font-semibold py-2 px-12 min-w-5 w-1/2 mx-auto font-semibold">Zobacz</a>
                                             </div>
                                         </div>
                                     @endif

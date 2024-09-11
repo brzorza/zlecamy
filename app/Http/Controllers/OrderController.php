@@ -5,25 +5,87 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Chat;
 use App\Models\User;
+use App\Models\Offer;
 use App\Models\Order;
 use App\Models\ChatText;
+use App\Enums\UserTypeEnum;
 use Illuminate\Http\Request;
 use App\Enums\OrderStatusEnum;
 use App\Enums\ChatTextTypeEnum;
-use App\Enums\UserTypeEnum;
 
 class OrderController extends Controller
 {
-        public function index(){
+        public function index(Request $request){
 
             $userStatus = User::select('type')->findOrFail(auth()->id());
 
+            $statuses = [
+                OrderStatusEnum::NEW,
+                OrderStatusEnum::IN_PROGRESS,
+                OrderStatusEnum::PAID,
+            ];
+
+            // Query for seller
             if($userStatus->type == UserTypeEnum::SELLER){
-                $orders = Order::where('seller_id', auth()->id())->with(['client:id,username'])->get();
+                // Show all / available
+                if($request->show_all || $request->status){
+                    $orders = Order::where('seller_id', auth()->id())->orderByDesc('updated_at')->with(['client:id,username'])->get();
+                }else{
+                    $orders = Order::where('seller_id', auth()->id())->whereIn('status', $statuses)->orderByDesc('updated_at')->with(['client:id,username'])->get();
+                }
+                
+                $uniqueUsernames = $orders->pluck('client.username', 'client.id')->unique();
+                
+                if($request->user){
+                    $orders = $orders->where('client_id', $request->user);
+                }
+            // Query for user
             }elseif($userStatus->type == UserTypeEnum::USER){
-                $orders = Order::where('client_id', auth()->id())->with(['seller:id,username'])->get();
+                // Show all / available
+                if($request->show_all || $request->status){
+                    $orders = Order::where('client_id', auth()->id())->orderByDesc('updated_at')->with(['seller:id,username'])->get();
+                }else{
+                    $orders = Order::where('client_id', auth()->id())->whereIn('status', $statuses)->orderByDesc('updated_at')->with(['seller:id,username'])->get();
+                }
+                
+                $uniqueUsernames = $orders->pluck('seller.username', 'seller.id')->unique();
+                
+                if($request->user){
+                    $orders = $orders->where('seller_id', $request->user);
+                }
             }
-            return view('users.orders', compact(['orders']));
+
+            // Filter orders
+            if($request->status){
+                $orders = $orders->where('status', $request->status);
+            }
+
+            // TODO filtr for deadline
+            if($request->deadline){
+                if($request->deadline == 'asc'){
+                    $orders = $orders->sortBy('deadline');
+                }elseif($request->deadline == 'desc'){
+                    $orders = $orders->sortByDesc('deadline');
+                }
+            }
+
+            return view('users.orders', compact(['orders', 'uniqueUsernames']));
+        }
+
+        public function singleOrder(Request $request){
+
+            $order = Order::with('chat:id,offer_id')->findOrFail($request->id);
+
+            if($order->seller_id == auth()->id() || $order->client_id == auth()->id()){
+            // Get cover for this order
+            $cover = Offer::select('id', 'cover')->findOrFail($order->chat->offer_id);
+            $order['cover'] = $cover->cover;
+
+                return view('users.singleOrder', compact('order'));
+            }else{
+                abort(403);
+            }
+
         }
 
         public function createOrder(Request $request){
@@ -113,7 +175,10 @@ class OrderController extends Controller
 
     public function getOrderInfo(Request $request){
 
-        $order = Order::findOrFail($request->id);
+        $order = Order::with('chat:id,offer_id')->findOrFail($request->id);
+
+        $cover = Offer::select('id', 'cover')->findOrFail($order->chat->offer_id);
+        $order['cover'] = $cover->cover;
 
         if($order->seller_id == auth()->id() || $order->client_id == auth()->id()){
             return response()->json([
@@ -125,13 +190,32 @@ class OrderController extends Controller
 
     }
 
+    public function payForOrder(Request $request){
+        
+        // TODO handle EVERY findOrFail!!! or any fails
+        $order = Order::findOrFail($request->id);
+
+        if(auth()->id() == $order->client_id){
+            // TODO add P24 code here
+
+            $order->status = OrderStatusEnum::PAID;
+
+            
+
+            return view();
+        }else{
+            abort(403);
+        }
+        
+    }
+
     private function createMessageInChat($chat_id, $sender_id){
 
         // declare values to create message
         $data['chat_id'] = $chat_id;
         $data['sender_id'] = $sender_id;
         $data['type'] = ChatTextTypeEnum::ORDER;
-        $data['value'] = 'Nowe zamówienie';
+        $data['value'] = 'Zobacz szczegóły';
 
         $new_order = ChatText::create($data);
 

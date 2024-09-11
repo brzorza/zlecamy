@@ -44,6 +44,10 @@ class Order extends Model
         });
     }
 
+    public function chat(){
+        return $this->belongsTo(Chat::class);
+    }
+
     public function client(){
         return $this->belongsTo(User::class);
     }

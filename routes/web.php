@@ -55,6 +55,8 @@ Route::post('/order/create/{id}', [OrderController::class,'createOrder'])->name(
 Route::get('/order/show/{id}', [OrderController::class,'getOrderInfo'])->name('orders.info')->middleware('auth');
 
 Route::get('/profile/orders', [OrderController::class,'index'])->name('profile.orders')->middleware('auth');
+Route::get('/profile/orders/{id}', [OrderController::class,'singleOrder'])->name('profile.single.order')->middleware('auth');
 Route::post('/order/changestatus', [OrderController::class,'changeOrderStatus'])->name('change.order.status')->middleware('auth');
+Route::post('/order/pay/{id}', [OrderController::class,'payForOrder'])->name('order.pay')->middleware('auth');
 
 // TODO create better policies
