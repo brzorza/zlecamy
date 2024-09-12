@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('surname')->nullable();
             $table->string('profile_picture')->nullable();
             $table->enum('type', array_column(UserTypeEnum::TYPES, 'value'))->default(UserTypeEnum::USER);
+            $table->date('deadline')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

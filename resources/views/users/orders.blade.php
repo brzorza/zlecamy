@@ -116,5 +116,4 @@
     </div>
 </div>
 
-{{-- <script src="{{ asset('js/order/submitOrderStatusChange.js') }}"></script> --}}
 <script src="http://127.0.0.1:8000/js/offersFiltersOld.js"></script>

@@ -32,6 +32,8 @@ export default {
       },
       maxWidth: {
         '120': '550px',
+        '200': '960px',
+        '240': '1200px'
       },
       minHeight: {
         '120': '550px',

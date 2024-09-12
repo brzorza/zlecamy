@@ -196,13 +196,26 @@ class OrderController extends Controller
         $order = Order::findOrFail($request->id);
 
         if(auth()->id() == $order->client_id){
+            
             // TODO add P24 code here
+
+            $seller = User::findOrFail($order->seller_id);
+
+            // calculate deadline and add it to user and order table
+            if($seller->deadline == null){
+                $order->deadline = Carbon::today()->addDays($order->order_ready_in);
+            }else{
+                $order->deadline = Carbon::parse($seller->deadline)->addDays($order->order_ready_in);
+            }
+
+            $seller->deadline = $order->deadline;
 
             $order->status = OrderStatusEnum::PAID;
 
+            $seller->save();
+            $order->save();
             
-
-            return view();
+            return redirect()->back()->with('success', 'Zamówienie zostało opłacone!');
         }else{
             abort(403);
         }

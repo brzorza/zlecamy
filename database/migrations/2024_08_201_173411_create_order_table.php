@@ -14,7 +14,7 @@ return new class extends Migration
             $table->foreignUuid('chat_id')->references('id')->on('chats');
             $table->foreignId('seller_id')->references('id')->on('users');
             $table->foreignId('client_id')->references('id')->on('users');
-            $table->string('description');
+            $table->string('description', 3000);
             $table->integer('price');
             $table->integer('order_ready_in');
             $table->date('available_until');

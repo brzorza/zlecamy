@@ -110,9 +110,9 @@ class ChatController extends Controller
             // dd($formfields);
 
             $data = ChatText::create($formfields);
-    
+
             $conversation = ChatText::select('type', 'value', 'sender_id', 'created_at')->where('chat_id', $formfields['chat_id'])->get();
-    
+
             return response()->json([
                 'data' => $conversation
             ]);
