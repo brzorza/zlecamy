@@ -125,8 +125,8 @@ class OrderController extends Controller
                 $formfields['available_until'] = Carbon::today()->addDays((int)$formfields['available_for_days']);
     
                 $order = Order::create($formfields);
-
-                $this->createMessageInChat($request->id, $chat->seller_id);
+                
+                $this->createMessageInChat($request->id, $chat->seller_id, $order->id);
 
                 $chat->touch();
     
@@ -202,7 +202,7 @@ class OrderController extends Controller
             $seller = User::findOrFail($order->seller_id);
 
             // calculate deadline and add it to user and order table
-            if($seller->deadline == null){
+            if($seller->deadline == null || $this->seeIfDeadlinePassed($seller->deadline)){
                 $order->deadline = Carbon::today()->addDays($order->order_ready_in);
             }else{
                 $order->deadline = Carbon::parse($seller->deadline)->addDays($order->order_ready_in);
@@ -222,13 +222,20 @@ class OrderController extends Controller
         
     }
 
-    private function createMessageInChat($chat_id, $sender_id){
+    private function seeIfDeadlinePassed($deadline){
+
+        $deadline_passed = Carbon::parse($deadline)->lte(Carbon::today());
+
+        return $deadline_passed;
+    }
+
+    private function createMessageInChat($chat_id, $sender_id, $order_id){
 
         // declare values to create message
         $data['chat_id'] = $chat_id;
         $data['sender_id'] = $sender_id;
         $data['type'] = ChatTextTypeEnum::ORDER;
-        $data['value'] = 'Zobacz szczegóły';
+        $data['value'] = $order_id;
 
         $new_order = ChatText::create($data);
 

@@ -5,7 +5,7 @@
             <div class="min-h-96 rounded-2xl flex flex-row justify-center w-full mt-4 mx-auto px-10 py-6 bg-backgroundl">
                 <div class="w-2/5 flex flex-col">
                     <h1 class="text-gray-500 text-5xl text-left mb-6 float-left">Chats</h1>
-                    <div class="scrollable-element h-120 flex flex-col mr-24 overflow-auto">
+                    <div class="scrollable-element h-120 flex flex-col mr-12 overflow-auto">
                         @foreach($allChats as $singleChat)
                         <a href="{{ route('profile.chat', ['id' => $singleChat->id]) }}" class="mb-4 mr-2">
                             <div class="border border-primary rounded-xl pointer p-4">
@@ -15,7 +15,7 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="w-2/5">
+                <div class="w-3/5">
                         <div class="border border-primary rounded-lg bg-background">
                             <div class="rounded-t-xl px-4 py-6 flex bg-backgroundl">
                                 <p>Wyberz chat</p>

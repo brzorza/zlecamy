@@ -40,12 +40,12 @@ function getMessages(){
                         </div>
                     `;
             }else if(item.type == 'order'){
+                // TODO custom class for all JS htmls
                 var message = `
                         <div class="w-full">
                             <div class="w-2/5 relative mx-auto mt-4 text-center bg-background border-2 border-primary rounded-lg p-6">
-                                <p class="text-xl font-semibold text-white ">Status zamówienia</p>
-                                <p class="text-base font-normal mb-6">${item.value}</p>
-                                <a href="#" class="border-2 border-primary bg-primary hover:bg-background hover:text-white rounded text-background font-semibold py-2 px-12 min-w-5 w-1/2 mx-auto font-semibold">Zobacz</a>
+                                <p class="text-xl font-semibold text-white mb-4">Nowe zamówienie</p>
+                                <a href="http://127.0.0.1:8000/profile/${item.value}" class="border-2 border-primary bg-primary hover:bg-background hover:text-white rounded text-background font-semibold py-2 px-12 min-w-5 w-1/2 mx-auto font-semibold">Zobacz</a>
                             </div>
                         </div>
                     `;
