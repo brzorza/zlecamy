@@ -48,7 +48,7 @@
     </section> --}}
 
     <section class="py-24">
-        <div class="flex flex-row">
+        <div class="flex flex-row items-center">
             <div id="accordion" class="w-3/5 flex flex-row">
                 <div class="w-4/5">
                     @forEach($categories as $index => $category)
@@ -67,11 +67,9 @@
                 </div>
             </div>
             <div class="w-2/5">
-                <h1 class="text-5xl font-semibold mb-2">Nie ma kategorii której szukasz?</h1>
-                {{-- TODO polinkować i obsłużyć --}}
-                <a href="" class="text-xl border-b underline-link">Daj nam znać!</a>
+                <h1 class="text-5xl font-semibold mb-2">Poznaj nasze kategorie!</h1>
                 <img src="{{asset('storage/images/homeImages/home-form.avif')}}" alt="Zdjęcie do przedstawienia kategorii"
-                class="categories-image mt-6 h-120 w-4/5 object-cover">
+                class="categories-image mt-6 h-150 w-4/5 object-cover">
             </div>
         
         </div>

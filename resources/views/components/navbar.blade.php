@@ -15,20 +15,23 @@
                     <div>
                         <a href="/profile" class="text-white hover:text-primary inline-flex items-center mx-1 text-xl"><i class="fa-regular fa-user"></i></a>
                     </div>
-                    <div id="notification" class="relative">
-                        <i class="bell-notification fa-regular fa-bell text-white hover:text-primary inline-flex items-center px-1 text-xl cursor-pointer"></i>
+                    <div class="relative">
+                        @if($count > 0)<div id="notification-dot"></div>@endif
+                        <i class="bell-notification fa-regular fa-bell text-white hover:text-primary inline-flex items-center px-1 text-xl cursor-pointer @if($count > 0) bell-animation @endif"></i>
                         <div class="notifications-wrapper hidden z-50 absolute top-8 right-0 w-120 flex flex-col">
                             @foreach ($notifications as $notification)
-                                <div class="border border-primary bg-background text-white text-md pl-4 pr-1 py-2 cursor-pointer">
-                                    <a href="{{ $notification->link }}">
+                            <a onClick="markNotificationRead({{$notification->id}}, '{{ $notification->link }}')">
+                                <div class="border border-primary bg-background text-white text-md pl-4 pr-1 py-2 cursor-pointer relative @if($notification->read == 1) notification-read @endif">
                                         <div class="hover-link relative flex flex-row items-center mr-4">
                                             <p class="pr-2">{{ $notification->message }}</p>
                                             <svg class="after-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>
                                         </div>
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
                             @endforeach
-                            <div class="border border-primary bg-background text-primaryh text-center text-md px-4 py-2 cursor-pointer">Zobacz wszystkie <i class="fa-solid fa-arrow-right text-xs"></i></div>
+                            <div class="border border-primary bg-background text-primaryh text-center text-md px-4 py-2 cursor-pointer"> 
+                                <a href="{{ route('show.notifications') }}">Zobacz wszystkie <i class="fa-solid fa-arrow-right text-xs"></i></a>
+                            </div>
                         </div>
                     </div>
                     <form method="POST" action="/logout" class="px-1">
@@ -66,4 +69,5 @@
     </nav>
 </div>
 
-<script src="{{ asset('js/notificationShow.js') }}"></script>
+<script src="{{ asset('js/notifications/notificationShow.js') }}"></script>
+<script src="{{ asset('js/notifications/readNotifications.js') }}"></script>

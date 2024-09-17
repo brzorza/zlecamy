@@ -1,7 +1,7 @@
 <?php
 
-use App\Enums\UserTypeEnum;
 use App\Models\Order;
+use App\Enums\UserTypeEnum;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\UserController;
@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\UsersBrowseController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OfferCatalogController;
 
 Route::get('/', [PagesController::class,'index'])->name('welcome');
@@ -42,6 +43,10 @@ Route::get('/offer/{id}', [OfferCatalogController::class,'showSingle'])->name('c
 
 // Newsletter
 Route::post('/newsletter', [NewsletterController::class,'addUser'])->name('newsletter');
+
+// Notifications
+Route::get('/notifications', [NotificationController::class,'index'])->name('show.notifications')->middleware('auth');
+Route::get('/notifications/read/{id}', [NotificationController::class,'readNotification'])->name('read.notifications')->middleware('auth');
 
 // Chat
 Route::post('/chat/create', [ChatController::class,'create'])->name('chat.create')->middleware('auth');

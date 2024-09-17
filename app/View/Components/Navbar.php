@@ -15,11 +15,13 @@ class Navbar extends Component
      */
     public $categories;
     public $notifications;
+    public $count;
 
-    public function __construct($categories = [], $notifications = [])
+    public function __construct($categories = [], $notifications = [], $count = [])
     {
         $this->categories = OfferCategory::all();
         $this->notifications = Notifications::where('user_id', auth()->id())->orderBy('created_at', 'desc')->limit(5)->get();
+        $this->count = Notifications::where('user_id', auth()->id())->where('read', 0)->count();
     }
 
     /**
