@@ -68,6 +68,24 @@ input[type="checkbox"]:checked {
     accent-color: #9fef00;
 }
 
+.notifications-wrapper div{
+    margin-top: -1px;
+    position: relative;
+}
+.notifications-wrapper svg.after-icon{
+    position: absolute;
+    right: 0px;
+    height: 15px;
+    width: auto;
+    fill: #9fef00;
+}
+.notifications-wrapper div:first-child{
+    border-radius: 10px 10px 0 0;
+}
+.notifications-wrapper div:last-child{
+    border-radius: 0 0 10px 10px;
+}
+
 /* Flash message animation */
 .animated-move-in-out{
     right: -500px;

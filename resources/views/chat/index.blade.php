@@ -145,7 +145,6 @@
         </div>
     </x-profile-menu>
 
-    {{-- TODO Add hidden so its hidden XD --}}
     @if($chat->seller_id == auth()->id())
         <div id="create-offer-wrapper" class="hidden absolute inset-0 w-[100vw] h-[100vh] z-10 flex items-center justify-center bg-overlay">
             <div class="relative bg-background border-2 border-primary max-w-4xl rounded-3xl py-6 px-12">

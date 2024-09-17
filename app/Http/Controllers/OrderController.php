@@ -12,6 +12,7 @@ use App\Enums\UserTypeEnum;
 use Illuminate\Http\Request;
 use App\Enums\OrderStatusEnum;
 use App\Enums\ChatTextTypeEnum;
+use CreateNotificationsTable;
 
 class OrderController extends Controller
 {
@@ -128,6 +129,9 @@ class OrderController extends Controller
                 
                 $this->createMessageInChat($request->id, $chat->seller_id, $order->id);
 
+                addNewNotification($order->client_id, 'Masz nową ofertę od ' . auth()->user()->username , '/profile/orders/' . $order->id);
+
+                // update chat so its on top of list
                 $chat->touch();
     
                 return redirect()->route('profile.chat', ['id' => $request->id])->with('success', 'Oferta została stworzona!');

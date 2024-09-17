@@ -15,12 +15,17 @@ class NewsletterController extends Controller
             'email' => ['required', 'email', Rule::unique('users', 'email')],
         ]);
 
-        if(isset(auth()->user()->username)){
-            $formfields['username'] = auth()->user()->username;
+        if(Newsletter::where('email', $formfields['email'])->exists()){
+            return back()->with('success', 'Już jesteś zapisany/na na nasz newsletter!');
+        }else{
+            if(isset(auth()->user()->username)){
+                $formfields['username'] = auth()->user()->username;
+            }
+    
+            Newsletter::create($formfields);
+    
+            return back()->with('success', 'Dziękujemy za zapisanie się na nasz newsletter!');
         }
 
-        Newsletter::create($formfields);
-
-        return back()->with('success', 'Dziękujemy za zapisanie się na nasz newsletter!');
     }
 }

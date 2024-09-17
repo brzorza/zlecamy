@@ -14,6 +14,11 @@ export default {
         // #191c1f tło z revolu
         // red BF3131 B31312 D80032
         // #ff7e5f, #feb47b alternatywne pomaranczowo pastelowe
+
+        // #111 - szary z gmaila
+        // #151515
+        // #2b2b2b
+
         primary: '#9fef00',
         primaryh: '#8ED600',
         secondary: '#00efe1',
