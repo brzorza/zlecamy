@@ -69,6 +69,10 @@ input[type="checkbox"]:checked {
 }
 
 /* Notifications */
+.rounded-no-notify{
+    border-radius: 10px !important;
+}
+
 #notification-dot::after{
     content: '';
     position: absolute;

@@ -45,7 +45,7 @@ Route::get('/offer/{id}', [OfferCatalogController::class,'showSingle'])->name('c
 Route::post('/newsletter', [NewsletterController::class,'addUser'])->name('newsletter');
 
 // Notifications
-Route::get('/notifications', [NotificationController::class,'index'])->name('show.notifications')->middleware('auth');
+Route::get('/profile/notifications', [NotificationController::class,'index'])->name('show.notifications')->middleware('auth');
 Route::get('/notifications/read/{id}', [NotificationController::class,'readNotification'])->name('read.notifications')->middleware('auth');
 
 // Chat
