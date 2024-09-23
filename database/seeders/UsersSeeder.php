@@ -42,7 +42,7 @@ class UsersSeeder extends Seeder
                 'email' => 'next_bro@gmail.com',
                 'phone_number' => '231123544',
                 'password' => Hash::make('123123123'),
-                'type' => UserTypeEnum::USER,
+                'type' => UserTypeEnum::SELLER,
                 'profile_picture' => 'images/profile_pictures/no-image.jpg',
             ],
             [

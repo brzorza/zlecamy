@@ -75,8 +75,7 @@
                     @endforeach
                 </div>
 
-                <div>
-                    {{-- TODO style pagination --}}
+                <div class="ml-auto">
                     {{ $offers->links() }}
                 </div>
             </div>
