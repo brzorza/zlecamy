@@ -1,4 +1,10 @@
-<x-layout>
+@extends('app')
+
+@section('title')
+        {{$offer->title}}
+@endsection
+
+@section('content')
     <div class="flex flex-row py-16 px-24">
 
         <div class="flex flex-col w-3/12 gap-6">
@@ -78,7 +84,10 @@
             @endif
             
             <div class="mt-6 border border-primary rounded-2xl px-12 py-10">
-                <p>{{$offer->description}}</p>
+                {{-- <p>{{$offer->description}}</p> --}}
+                <div class="description-box">
+                    {!! $htmlDescription !!}
+                </div>
             </div>
         </div>
 
@@ -115,4 +124,11 @@
             </div>
         </div>
     </div>
-</x-layout>
+@endsection
+
+@section('script')
+    <script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
+    <script>
+
+    </script>
+@endsection

@@ -5,7 +5,25 @@
 *{
     font-family: 'Quicksand';
 }
+
+:root {
+    --primary: #9fef00;
+    --primaryh: #8ED600;
+    --secondary: #00efe1;
+    --danger: #B31312;
+    --dangerh: #BF3131;
+    --background: #121112;
+    --backgroundl: #1e1e1e;
+    --backgroundll: #333333;
+    --overlay: #121212c0;
+}
+
 /* TODO remove all @apply */
+
+.input-required::after {
+    content: '*';
+    color: var(--danger);
+}
 
 /* Hide up and down on input type number */
 input[type="number"] {
@@ -199,42 +217,6 @@ input[type="checkbox"]:checked {
     50% { border-color: #9fef00; }
 }
 
-/* home button hover spin */
-/* @property --bg-angle {
-    inherits: false;
-    initial-value: 205deg;
-    syntax: "<angle>";
-}
-
-@keyframes spin {
-    to {
-        --bg-angle: 565deg;
-    }
-}
-
-.home-button-animation {
-    
-    animation: spin 2.5s infinite linear paused;
-
-    background:
-    linear-gradient(
-        to bottom,
-        #121112,
-        #121112
-    )
-    padding-box,
-    conic-gradient(
-        from var(--bg-angle),
-        hsl(78, 100%, 50%) 10%,
-        hsl(190, 100%, 44.7%) 70%
-    )
-    border-box;
-    border: 3px solid transparent;
-    &:hover {
-        animation-play-state: running;
-    }
-} */
-
 .home-route::after{ 
     content: '';
     position: absolute;
@@ -321,6 +303,50 @@ input:-internal-autofill-selected {
 .tag-hover:hover::after {
     visibility: visible;
     opacity: 1;
+}
+
+/* Single offer description */
+.description-box h1{
+    font-size: 34px !important;
+    font-weight: 600 !important;
+}
+.description-box h2{
+    font-size: 30px !important;
+    font-weight: 600 !important;
+}
+.description-box h3{
+    font-size: 26px !important;
+    font-weight: 600 !important;
+}
+.description-box p{
+    font-size: 18px !important;
+    font-weight: 400 !important;
+}
+.description-box a{
+    text-decoration: underline;
+    color: var(--primary) !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+}
+
+.description-box ul{
+    list-style-type: disc !important;
+    padding-left: 20px !important;
+    margin: 10px 0 !important;
+}
+.description-box ul li{
+    padding: 5px 0 !important;
+    line-height: 15px !important;
+}
+
+.description-box ol{
+    list-style-type: decimal !important;
+    padding-left: 20px !important;
+    margin: 10px 0 !important;
+}
+.description-box ol li{
+    padding: 5px 0 !important;
+    line-height: 15px !important;
 }
 
 /* Chat */

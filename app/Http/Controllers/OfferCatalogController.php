@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use nadar\quill\Lexer as QuillParser;
+
 use App\Models\Offer;
 use Illuminate\Http\Request;
 use App\Models\OfferCategory;
@@ -87,6 +89,9 @@ class OfferCatalogController extends Controller
 
         $offer = Offer::with('user')->findOrFail($id);
 
-        return view('catalog.offer-page', compact('offer'));
+        $parser = new QuillParser($offer->description);
+        $htmlDescription = $parser->render();
+
+        return view('catalog.offer-page', compact('offer', 'htmlDescription'));
     }
 }

@@ -15,9 +15,9 @@ return new class extends Migration
         Schema::create('offers', function (Blueprint $table) {
             $table->id()->primary();
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->string('title');
-            $table->string('description');
-            $table->string('localization');
+            $table->string('title', 100);
+            $table->text('description');
+            $table->string('localization', 20);
             // TODO add default offer image
             $table->string('cover')->nullable();
             $table->string('category_id');
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('all_tags')->nullable();
             $table->integer('price');
             $table->enum('price_type', array_column(PriceTypeEnum::TYPES, 'value'))->default(PriceTypeEnum::HOUR);
-            $table->string('delivery_time');
+            $table->string('delivery_time', 50);
             $table->integer('promoted')->default(0);
             $table->boolean('active')->default(1);  //aktywna/nie aktywna, ale nadal widoczna dla użytkownika
             $table->boolean('visible')->default(1); //usunięte czy coś
