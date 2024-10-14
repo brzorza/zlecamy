@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Zlecamy</title>
+    <title> @yield('title') | Zlecamy</title>
+    {{-- TODO dodać favicon --}}
+    <link rel="icon" type="image/x-icon" href="{{asset('images/logo.png')}}">
     {{-- TODO wszystkie mata tagi --}}
     @vite('resources/css/app.css')
 
@@ -18,16 +20,18 @@
     
     {{-- AlpineJS --}}
     <script src="//unpkg.com/alpinejs" defer></script>
+
+    @yield('head')
 </head>
 <body class="bg-background text-white">
 
-<x-navbar/>
+    <x-navbar/>
 
     <x-flash-message/>
 
-
-    {{$slot}}
-
+    <main class="{{ request()->is('profile*') ? 'pt-24' : 'pt-36' }}">
+        @yield('content')
+    </main>
 
     <script>
         // Toggle mobile menu
@@ -46,7 +50,9 @@
 </body>
 
 @if(!request()->is(('profile*')))
-<x-footer/>
+    <x-footer/>
 @endif
+
+@yield('script')
 
 </html>
