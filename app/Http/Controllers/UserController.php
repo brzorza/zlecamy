@@ -147,4 +147,21 @@ class UserController extends Controller
 
         return view('users.offers', compact('allOffers'));
     }
+
+    public function swichUserType(){
+
+        $user = User::where("id", auth()->user()->id)->first();
+
+        // Switch user type from seller to user and vice versa
+        if($user->type == UserTypeEnum::USER){
+            $user->type = UserTypeEnum::SELLER; 
+        }elseif($user->type == UserTypeEnum::SELLER){
+            $user->type = UserTypeEnum::USER;
+        }
+        $user->save();
+
+        // dd($user->type == UserTypeEnum::SELLER);
+        return back()->with("success","Typ konta został zmieniony");
+
+    }
 }

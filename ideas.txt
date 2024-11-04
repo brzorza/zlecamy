@@ -1,8 +1,0 @@
-NAVBAR
-
-logo serch login
-all categories
-on hover subcategories
---------------------------
-profile seller/buyer
-creating zleenia

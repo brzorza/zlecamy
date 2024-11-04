@@ -18,6 +18,9 @@ Route::get('/', [PagesController::class,'index'])->name('welcome');
 // User Login/Register
 Route::get('/login', [UserController::class,'index']);
 
+// User actions
+Route::post('/user/switch-user-type', [UserController::class,'swichUserType'])->name('switch.user.type')->middleware('auth');
+
 Route::post('/register', [UserController::class,'store'])->name('register');
 Route::post('/login', [UserController::class, 'authenticate'])->name('login');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout')->middleware('auth');

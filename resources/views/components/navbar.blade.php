@@ -10,8 +10,15 @@
                         <a href="/about" class="text-white hover:text-primary inline-flex items-center px-1 pt-1 text-md font-regular">Nowości</a>
                     </div>
                 </div>
-                <div class="hidden md:flex md:items-center md:space-x-8">
+                <div class="hidden md:flex md:items-center md:space-x-4">
                     @auth
+                    <div>
+                        <form action="{{ route('switch.user.type') }}" method="POST">
+                            {{-- TODO move this form to user prfile edit --}}
+                            @csrf
+                            <button type="submit" id="switch-user-type" class="text-white hover:text-primary inline-flex items-center mx-1 text-xl"><i class="fa-solid fa-repeat"></i></button>
+                        </form>
+                    </div>
                     <div>
                         <a href="/profile" class="text-white hover:text-primary inline-flex items-center mx-1 text-xl"><i class="fa-regular fa-user"></i></a>
                     </div>
